@@ -1,0 +1,3173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A192F">
+<title>StockPOS | Tu negocio en orden, tus ventas al instante</title>
+<meta name="description" content="StockPOS: Sistema de punto de venta e inventario inteligente para pequeños y medianos comercios. Cobros rápidos, inventario en tiempo real y reportes en la nube.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root {
+  /* PALETA CORPORATIVA Y PROFESIONAL */
+  --navy-deep: #0A192F;        /* Azul Marino Profundo principal (Hero, Navbar, Footer) */
+  --navy: #0F172A;             /* Azul Marino Corporativo complementario */
+  --navy-dark: #070F1E;        /* Azul Marino Base profunda */
+  --navy-surface: #1E293B;     /* Superficies y tarjetas oscuras */
+  --navy-surface-light: #334155;
+  
+  --emerald: #10B981;          /* Verde Esmeralda Corporativo */
+  --emerald-dark: #059669;     /* Verde Esmeralda de contraste */
+  --emerald-light: #34D399;    /* Verde Esmeralda brillante */
+  --emerald-soft: #ECFDF5;     /* Fondo suave verde */
+  --emerald-border: #A7F3D0;   /* Borde verde corporativo */
+  
+  --bg-light: #F8FAFC;         /* Fondo General Claro */
+  --bg-white: #FFFFFF;         /* Blanco puro */
+  
+  --text-dark: #1E293B;        /* Gris oscuro para títulos y texto principal */
+  --text-body: #334155;        /* Gris oscuro balanceado para lectura */
+  --text-muted: #64748B;       /* Gris neutro para texto secundario */
+  --text-light: #94A3B8;       /* Gris claro sobre fondos oscuros */
+  --text-white: #FFFFFF;       /* Blanco puro */
+  
+  --border-light: #E2E8F0;     /* Bordes en fondos claros */
+  --border-subtle: #CBD5E1;    /* Bordes secundarios */
+  --border-dark: #334155;      /* Bordes en paneles oscuros */
+  --border-navy: rgba(255, 255, 255, 0.08); /* Bordes en azul marino */
+  
+  --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.05);
+  --shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 40px -5px rgba(15, 23, 42, 0.12);
+  --shadow-hero: 0 25px 60px -10px rgba(10, 25, 47, 0.45);
+  --shadow-float: 0 20px 35px -5px rgba(10, 25, 47, 0.22), 0 0 0 1px rgba(226, 232, 240, 0.9);
+  --glow-emerald: 0 0 30px rgba(16, 185, 129, 0.35);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-body);
+  background: var(--bg-light);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, textarea {
+  font: inherit;
+}
+
+.container {
+  width: min(1180px, 92%);
+  margin: auto;
+}
+
+section {
+  scroll-margin-top: 86px;
+}
+
+/* =========================================================
+   BARRA SUPERIOR (NAVBAR) - AZUL MARINO PROFUNDO (#0A192F)
+   ========================================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 25, 47, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-navy);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-inner {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+.logo img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.logo-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--navy-surface);
+  color: var(--emerald);
+  font-size: 1.25rem;
+  border: 1px solid var(--border-dark);
+}
+
+.brand {
+  font-size: 1.38rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-white);
+  line-height: 1.1;
+}
+
+.brand span {
+  color: var(--emerald);
+}
+
+.slogan {
+  font-size: 0.68rem;
+  color: var(--text-light);
+  display: block;
+  margin-top: 0.2rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.nav-links a:not(.btn) {
+  color: #E2E8F0;
+  transition: color 0.2s ease;
+  position: relative;
+  padding: 0.3rem 0;
+}
+
+.nav-links a:not(.btn):hover {
+  color: var(--emerald);
+}
+
+.nav-links a:not(.btn):after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--emerald);
+  transition: width 0.25s ease;
+  border-radius: 2px;
+}
+
+.nav-links a:not(.btn):hover:after {
+  width: 100%;
+}
+
+.menu-btn {
+  display: none;
+  background: var(--navy-surface);
+  color: #FFFFFF;
+  border: 1px solid var(--border-dark);
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.menu-btn:hover {
+  background: var(--navy-surface-light);
+  border-color: var(--emerald);
+}
+
+/* =========================================================
+   BOTONES CORPORATIVOS
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.82rem 1.45rem;
+  border: 0;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Botón Principal: Verde Esmeralda Corporativo */
+.btn-emerald,
+.btn-primary-emerald {
+  background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+  color: #FFFFFF;
+  box-shadow: 0 10px 24px -4px rgba(16, 185, 129, 0.4);
+}
+
+.btn-emerald:hover,
+.btn-primary-emerald:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -4px rgba(16, 185, 129, 0.55);
+}
+
+/* Botón Secundario de Video: Contorno profesional */
+.btn-video,
+.btn-secondary-video {
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-video:hover,
+.btn-secondary-video:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--emerald);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.btn-video-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--emerald);
+  color: var(--navy-deep);
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  padding-left: 2px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-video:hover .btn-video-icon,
+.btn-secondary-video:hover .btn-video-icon {
+  transform: scale(1.1);
+  background: #FFFFFF;
+  color: var(--emerald-dark);
+}
+
+.btn-outline {
+  background: #FFFFFF;
+  color: var(--text-dark);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-outline:hover {
+  transform: translateY(-2px);
+  border-color: var(--emerald);
+  color: var(--emerald-dark);
+  box-shadow: var(--shadow);
+}
+
+.btn-outline-navy {
+  background: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline-navy:hover {
+  border-color: var(--emerald);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+/* =========================================================
+   SECCIÓN HERO PRINCIPAL - AZUL MARINO PROFUNDO (#0A192F)
+   ========================================================= */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 5.5rem 0 4.8rem;
+  background: radial-gradient(circle at 82% 22%, rgba(16, 185, 129, 0.14) 0%, transparent 45%),
+              radial-gradient(circle at 12% 85%, rgba(15, 23, 42, 0.95) 0%, transparent 52%),
+              var(--navy-deep);
+  color: #FFFFFF;
+  border-bottom: 1px solid var(--border-navy);
+}
+
+.hero-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.hero-glow-blob {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.1);
+  filter: blur(90px);
+  top: -120px;
+  right: -60px;
+  pointer-events: none;
+}
+
+.hero-glow-blob-2 {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.8);
+  filter: blur(80px);
+  bottom: -100px;
+  left: -80px;
+  pointer-events: none;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 3.5rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* LADO IZQUIERDO: TEXTO Y ACCIONES */
+.hero-content {
+  position: relative;
+}
+
+/* Subtítulo / Badge Superior */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.32);
+  color: var(--emerald-light);
+  border-radius: 999px;
+  padding: 0.42rem 1.05rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 10px var(--emerald);
+  animation: pulseEmerald 2s infinite;
+}
+
+/* Título Principal Grande */
+.hero-title {
+  font-size: clamp(2.55rem, 4.8vw, 4.1rem);
+  line-height: 1.13;
+  letter-spacing: -0.05em;
+  color: #FFFFFF;
+  font-weight: 800;
+  margin-bottom: 1.35rem;
+}
+
+.text-emerald,
+.highlight-emerald {
+  color: var(--emerald);
+  display: inline;
+}
+
+/* Párrafo Descriptivo */
+.hero-desc {
+  font-size: 1.06rem;
+  line-height: 1.7;
+  color: var(--text-light);
+  max-width: 580px;
+  margin-bottom: 1.85rem;
+}
+
+/* Botones de Acción Doble */
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+/* Puntos clave / Bullets */
+.hero-bullets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  font-size: 0.82rem;
+  color: #CBD5E1;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.hero-bullets span {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.hero-bullets i {
+  color: var(--emerald);
+  font-size: 0.95rem;
+}
+
+/* Barra Inferior de Confianza */
+.hero-trust-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trust-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.trust-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--navy-surface);
+  border: 2px solid var(--navy-deep);
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  color: var(--emerald);
+  margin-left: -9px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.trust-avatar:first-child {
+  margin-left: 0;
+}
+
+.trust-avatar-more {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--emerald-dark);
+  border: 2px solid var(--navy-deep);
+  display: grid;
+  place-items: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-left: -9px;
+}
+
+.trust-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.trust-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: #F59E0B;
+  font-size: 0.78rem;
+}
+
+.trust-stars-val {
+  color: #FFFFFF;
+  font-size: 0.76rem;
+  font-weight: 700;
+  margin-left: 0.35rem;
+}
+
+.trust-label {
+  font-size: 0.8rem;
+  color: #94A3B8;
+  font-weight: 500;
+  margin-top: 0.15rem;
+}
+
+/* =========================================================
+   LADO DERECHO: ILUSTRACIÓN Y MÉTRICAS FLOTANTES
+   ========================================================= */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mockup-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 530px;
+}
+
+/* Gráfico Principal: Mockup del Sistema StockPOS */
+.pos-mockup {
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 22px;
+  box-shadow: var(--shadow-hero);
+  overflow: hidden;
+  position: relative;
+  color: #FFFFFF;
+}
+
+/* Cabecera del Mockup */
+.mock-topbar {
+  background: rgba(10, 25, 47, 0.7);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mock-window-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.mock-window-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+}
+
+.mock-window-dots span:nth-child(1) { background: #EF4444; }
+.mock-window-dots span:nth-child(2) { background: #F59E0B; }
+.mock-window-dots span:nth-child(3) { background: var(--emerald); }
+
+.mock-system-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #CBD5E1;
+}
+
+.mock-system-title img {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.mock-system-title strong {
+  color: var(--emerald);
+}
+
+.mock-status-pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--emerald-light);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.online-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald);
+  animation: pulseEmerald 1.8s infinite;
+}
+
+/* Pantalla interna del Mockup */
+.mock-body {
+  padding: 1.35rem;
+}
+
+/* Métricas internas rápidas */
+.mock-kpis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-bottom: 1.1rem;
+}
+
+.mock-kpi-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+}
+
+.kpi-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.kpi-value {
+  display: block;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0.25rem 0 0.1rem;
+  letter-spacing: -0.02em;
+}
+
+.kpi-change {
+  font-size: 0.68rem;
+  color: var(--emerald-light);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Simulación de Caja / Ticket en vivo */
+.mock-pos-terminal {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  color: #94A3B8;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 0.6rem;
+}
+
+.terminal-header strong {
+  color: #FFFFFF;
+}
+
+.cart-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.74rem;
+  color: #E2E8F0;
+  padding: 0.35rem 0;
+}
+
+.cart-item-row i {
+  color: var(--emerald);
+  margin-right: 0.4rem;
+}
+
+.cart-item-price {
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.terminal-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.65rem;
+  margin-top: 0.45rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.total-txt {
+  font-size: 0.75rem;
+  color: #94A3B8;
+}
+
+.total-amt {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--emerald-light);
+}
+
+.btn-mock-charge {
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.48rem 0.85rem;
+  font-size: 0.74rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Gráfico de barras de ventas semanal */
+.mock-sales-chart {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 0.85rem;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--text-light);
+  margin-bottom: 0.6rem;
+}
+
+.chart-bars-wrap {
+  height: 85px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 0.4rem 0.2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.chart-bars-wrap span {
+  flex: 1;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(0deg, var(--emerald-dark), var(--emerald-light));
+  animation: growBar 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: bottom;
+  position: relative;
+}
+
+.chart-bars-wrap span:nth-child(1) { height: 42%; }
+.chart-bars-wrap span:nth-child(2) { height: 68%; }
+.chart-bars-wrap span:nth-child(3) { height: 50%; }
+.chart-bars-wrap span:nth-child(4) { height: 82%; }
+.chart-bars-wrap span:nth-child(5) { height: 95%; }
+.chart-bars-wrap span:nth-child(6) { height: 65%; }
+.chart-bars-wrap span:nth-child(7) { height: 100%; box-shadow: 0 0 12px rgba(16, 185, 129, 0.6); }
+
+/* =========================================================
+   TARJETAS FLOTANTES DE MÉTRICAS (CAJAS BLANCAS REDONDEADAS)
+   ========================================================= */
+.floating-metric-card {
+  position: absolute;
+  background: #FFFFFF;
+  border-radius: 18px;
+  padding: 0.95rem 1.15rem;
+  box-shadow: var(--shadow-float);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  z-index: 10;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-metric-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 25px 45px -5px rgba(10, 25, 47, 0.3), 0 0 0 1px var(--emerald);
+}
+
+/* Tarjeta 1: Arriba a la derecha */
+.metric-card-top {
+  top: -24px;
+  right: -24px;
+  animation: floatCard1 5.5s ease-in-out infinite;
+}
+
+/* Tarjeta 2: Abajo a la izquierda */
+.metric-card-bottom {
+  bottom: -22px;
+  left: -24px;
+  animation: floatCard2 6.5s ease-in-out infinite;
+}
+
+.metric-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  border: 1px solid var(--emerald-border);
+}
+
+.metric-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-num {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--emerald-dark);
+  letter-spacing: -0.03em;
+}
+
+.metric-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 0.1rem;
+}
+
+.metric-sub {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.1rem;
+}
+
+.metric-sub i {
+  color: var(--emerald-dark);
+}
+
+/* Chip pill complementario flotante */
+.floating-chip-pill {
+  position: absolute;
+  bottom: 60px;
+  right: -20px;
+  background: #FFFFFF;
+  color: var(--text-dark);
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow-float);
+  font-size: 0.74rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
+  animation: floatCard1 7s ease-in-out infinite reverse;
+}
+
+.floating-chip-pill i {
+  color: var(--emerald-dark);
+}
+
+/* =========================================================
+   MODAL DE VIDEO / PRESENTACIÓN DEL SISTEMA
+   ========================================================= */
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.video-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 47, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.video-modal-dialog {
+  position: relative;
+  z-index: 2;
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  width: min(840px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  transform: scale(0.94) translateY(15px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #FFFFFF;
+}
+
+.video-modal.open .video-modal-dialog {
+  transform: scale(1) translateY(0);
+}
+
+.video-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.modal-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--emerald-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.video-modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: var(--emerald);
+  border-color: var(--emerald);
+  color: var(--navy-deep);
+}
+
+.video-modal-body {
+  padding: 1.6rem;
+}
+
+/* Reproductor de demostración del sistema */
+.presentation-player {
+  background: var(--navy-deep);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.presentation-stage {
+  min-height: 280px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08), transparent 70%), var(--navy-deep);
+}
+
+.demo-step {
+  display: none;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.demo-step.active {
+  display: block;
+}
+
+.demo-step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--emerald-light);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.demo-step h4 {
+  font-size: 1.45rem;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+}
+
+.demo-step p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  max-width: 620px;
+  margin-bottom: 1.4rem;
+  line-height: 1.6;
+}
+
+.step-card-preview {
+  background: var(--navy-surface);
+  border: 1px solid var(--border-dark);
+  border-radius: 14px;
+  padding: 1.1rem;
+  max-width: 580px;
+}
+
+.step-preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.step-preview-row:last-child {
+  border-bottom: none;
+}
+
+.step-preview-row span i {
+  color: var(--emerald);
+  margin-right: 0.5rem;
+}
+
+.presentation-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.p-tab-btn {
+  background: transparent;
+  border: 0;
+  padding: 1rem 0.8rem;
+  color: #94A3B8;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-bottom: 3px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.p-tab-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.p-tab-btn.active {
+  color: var(--emerald-light);
+  border-bottom-color: var(--emerald);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.video-modal-footer {
+  padding: 1.25rem 1.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.modal-footer-hint {
+  font-size: 0.78rem;
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-footer-hint i {
+  color: var(--emerald);
+}
+
+.modal-footer-actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+/* =========================================================
+   ANUNCIOS / BANNER PROMOCIONAL
+   ========================================================= */
+.anuncios {
+  position: relative;
+  width: min(1180px, 92%);
+  height: 280px;
+  margin: 2.2rem auto 0;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--navy);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+}
+
+.anuncios img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.anuncios img.active {
+  opacity: 1;
+}
+
+/* =========================================================
+   MISION Y VISION (FONDO CLARO)
+   ========================================================= */
+.mv-section {
+  padding: 5rem 0 4rem;
+  background: var(--bg-white);
+}
+
+.section-heading {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 2.8rem;
+}
+
+.kicker {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--emerald-dark);
+  margin-bottom: 0.6rem;
+}
+
+.section-heading h2 {
+  font-size: clamp(2rem, 3.8vw, 2.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  color: var(--text-dark);
+  font-weight: 800;
+}
+
+.section-heading p {
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  font-size: 1.02rem;
+}
+
+.mv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.8rem;
+}
+
+.mv-card {
+  background: #FFFFFF;
+  padding: 2.4rem;
+  border: 1px solid var(--border-light);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.mv-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--emerald-border);
+}
+
+.mv-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--emerald), var(--emerald-dark));
+}
+
+.mv-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  font-size: 1.35rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--emerald-border);
+}
+
+.mv-card h3 {
+  font-size: 1.35rem;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+  font-weight: 800;
+}
+
+.mv-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   TECH STRIP (ENFOQUE DE STOCKPOS) - FONDO CLARO
+   ========================================================= */
+.tech-strip {
+  padding: 1.6rem 0;
+  background: var(--bg-light);
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  background: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.tech-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--emerald-border);
+  box-shadow: var(--shadow);
+}
+
+.tech-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  font-size: 1.2rem;
+  border: 1px solid var(--emerald-border);
+}
+
+.tech-item strong {
+  display: block;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.tech-item p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-top: 0.2rem;
+}
+
+/* =========================================================
+   ABOUT STRIP - AZUL MARINO PROFUNDO
+   ========================================================= */
+.about-strip {
+  background: var(--navy);
+  color: #FFFFFF;
+  padding: 3.5rem 0;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border-navy);
+  border-bottom: 1px solid var(--border-navy);
+}
+
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.about-inner h2 {
+  font-size: clamp(1.85rem, 3.2vw, 2.6rem);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.about-inner h2 span {
+  color: var(--emerald-light);
+}
+
+.about-inner p {
+  color: var(--text-light);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.about-pills {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.4rem;
+}
+
+.about-pills span {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #E2E8F0;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.about-pills span i {
+  color: var(--emerald-light);
+}
+
+/* =========================================================
+   FUNCIONES ESENCIALES - FONDO BLANCO
+   ========================================================= */
+.features-section {
+  padding: 5.5rem 0;
+  background: var(--bg-white);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+}
+
+.feature-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 1.9rem 1.45rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-7px);
+  border-color: var(--emerald-border);
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.12);
+}
+
+.num-tag {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--emerald-dark);
+  background: var(--emerald-soft);
+  border: 1px solid var(--emerald-border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+}
+
+.card-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  font-size: 1.45rem;
+  margin-bottom: 1.35rem;
+  border: 1px solid var(--emerald-border);
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  margin-bottom: 0.65rem;
+  font-weight: 800;
+}
+
+.feature-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  border: 1px solid var(--emerald-border);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+/* =========================================================
+   VISTAS DEL SISTEMA - FONDO CLARO
+   ========================================================= */
+.views-section {
+  background: var(--bg-light);
+  padding: 5.5rem 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.view-list {
+  display: grid;
+  gap: 1.8rem;
+}
+
+.view-card {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: #FFFFFF;
+  padding: 2.2rem;
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.view-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.view-title {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.view-number {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+  display: grid;
+  place-items: center;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+}
+
+.view-copy h3 {
+  font-size: 1.38rem;
+  color: var(--text-dark);
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.view-copy p {
+  color: var(--text-muted);
+  font-size: 0.94rem;
+  margin: 0.8rem 0 1rem;
+  line-height: 1.6;
+}
+
+.view-copy ul {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  font-size: 0.86rem;
+  color: var(--text-body);
+}
+
+.view-copy li i {
+  color: var(--emerald-dark);
+  margin-right: 0.55rem;
+}
+
+/* Previews de Pantalla en Azul Marino */
+.preview {
+  background: var(--navy);
+  color: #FFFFFF;
+  border-radius: 20px;
+  padding: 1.4rem;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow);
+}
+
+.preview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+.preview-head strong {
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.preview-head span {
+  color: var(--text-light);
+  font-size: 0.7rem;
+}
+
+.login-form {
+  max-width: 340px;
+  margin: 0.6rem auto;
+  padding: 1.35rem;
+  background: var(--navy-surface);
+  border: 1px solid var(--border-dark);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.mini-logo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.8rem;
+}
+
+.mini-logo span {
+  color: var(--emerald);
+}
+
+.fake-input {
+  padding: 0.7rem 0.85rem;
+  background: var(--navy-deep);
+  border: 1px solid var(--border-dark);
+  color: var(--text-light);
+  border-radius: 8px;
+  text-align: left;
+  font-size: 0.75rem;
+  margin: 0.6rem 0;
+}
+
+.fake-button {
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+  color: #FFFFFF;
+  border-radius: 8px;
+  padding: 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-top: 0.7rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.products {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.74rem;
+}
+
+.products th {
+  text-align: left;
+  color: var(--text-light);
+  font-weight: 600;
+  padding: 0.65rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.products td {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #E2E8F0;
+}
+
+.status {
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.18);
+  color: var(--emerald-light);
+  font-size: 0.65rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status.warn {
+  background: rgba(245, 158, 11, 0.2);
+  color: #FCD34D;
+}
+
+.status.low {
+  background: rgba(239, 68, 68, 0.2);
+  color: #FCA5A5;
+}
+
+.preview-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+}
+
+.preview-stat {
+  padding: 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.preview-stat small {
+  font-size: 0.65rem;
+  color: var(--text-light);
+  display: block;
+}
+
+.preview-stat strong {
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.mini-chart {
+  height: 85px;
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  padding: 0.7rem 0.2rem 0;
+}
+
+.mini-chart i {
+  flex: 1;
+  display: block;
+  background: linear-gradient(0deg, var(--emerald-dark), var(--emerald-light));
+  border-radius: 5px 5px 0 0;
+  animation: growBar 1.3s ease both;
+}
+
+.mini-chart i:nth-child(1) { height: 35%; }
+.mini-chart i:nth-child(2) { height: 55%; }
+.mini-chart i:nth-child(3) { height: 43%; }
+.mini-chart i:nth-child(4) { height: 80%; }
+.mini-chart i:nth-child(5) { height: 65%; }
+.mini-chart i:nth-child(6) { height: 95%; }
+
+/* =========================================================
+   BENEFICIOS - AZUL MARINO PROFUNDO
+   ========================================================= */
+.benefits {
+  padding: 5.5rem 0;
+  background: var(--navy-deep);
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border-navy);
+}
+
+.benefits .section-heading h2 {
+  color: #FFFFFF;
+}
+
+.benefits .section-heading p {
+  color: var(--text-light);
+}
+
+.benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.benefit {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  padding: 1.65rem;
+  transition: all 0.3s ease;
+}
+
+.benefit:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--emerald);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.benefit i {
+  font-size: 1.5rem;
+  color: var(--emerald);
+  margin-bottom: 0.95rem;
+  display: inline-block;
+}
+
+.benefit h3 {
+  font-size: 1.08rem;
+  margin-bottom: 0.45rem;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.benefit p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.55;
+}
+
+/* =========================================================
+   DESCARGAR / CONOCER - FONDO CLARO CON PANEL MARINO
+   ========================================================= */
+.download-section {
+  padding: 5.5rem 0;
+  background: var(--bg-white);
+}
+
+.download-panel {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
+  color: #FFFFFF;
+  border-radius: 28px;
+  padding: 3.5rem;
+  box-shadow: var(--shadow-hero);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.download-panel::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -80px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15);
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+.download-panel h2 {
+  font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+.download-panel h2 span {
+  color: var(--emerald-light);
+}
+
+.download-panel p {
+  color: var(--text-light);
+  margin: 1.1rem 0 1.6rem;
+  max-width: 580px;
+  position: relative;
+  z-index: 1;
+  font-size: 1.02rem;
+}
+
+.download-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.download-art {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  min-height: 200px;
+}
+
+.download-art .app-icon {
+  width: 140px;
+  height: 140px;
+  border-radius: 32px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+  color: #FFFFFF;
+  font-size: 3.8rem;
+  box-shadow: 0 0 50px rgba(16, 185, 129, 0.45);
+  transform: rotate(-6deg);
+  animation: floatCard1 5s ease-in-out infinite;
+}
+
+.download-note {
+  font-size: 0.78rem !important;
+  color: #94A3B8 !important;
+  margin-top: 1.1rem !important;
+}
+
+/* =========================================================
+   RESEÑAS / OPINIONES - FONDO CLARO
+   ========================================================= */
+.reviews {
+  padding: 5rem 0;
+  background: var(--bg-light);
+  border-top: 1px solid var(--border-light);
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.3rem;
+}
+
+.review {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 1.6rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.review:hover {
+  transform: translateY(-5px);
+  border-color: var(--emerald-border);
+}
+
+.review-top {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.9rem;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  font-weight: 800;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--emerald-border);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.review-top strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.review-top small {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.stars {
+  color: #F59E0B;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.8rem;
+}
+
+.review p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* =========================================================
+   CONTACTO - FRANJA AZUL MARINO PROFUNDO
+   ========================================================= */
+.contact-wrap {
+  padding: 4.5rem 0;
+  background: var(--bg-white);
+}
+
+.contact {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
+  color: #FFFFFF;
+  text-align: center;
+  padding: 4rem 2rem;
+  border-radius: 28px;
+  box-shadow: var(--shadow-hero);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.12);
+  filter: blur(60px);
+  top: -100px;
+  right: -60px;
+  pointer-events: none;
+}
+
+.contact h2 {
+  font-size: clamp(2rem, 3.8vw, 2.7rem);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  position: relative;
+  z-index: 1;
+}
+
+.contact p {
+  color: var(--text-light);
+  max-width: 620px;
+  margin: 1.1rem auto 0;
+  position: relative;
+  z-index: 1;
+  font-size: 1.04rem;
+}
+
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-wa {
+  background: #25D366;
+  color: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+}
+
+.btn-wa:hover {
+  background: #20BA5A;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+}
+
+.btn-mail {
+  background: var(--navy-surface);
+  color: #FFFFFF;
+  border: 1px solid var(--border-dark);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.btn-mail:hover {
+  border-color: var(--emerald);
+  transform: translateY(-2px);
+  color: var(--emerald-light);
+}
+
+/* =========================================================
+   PIE DE PÁGINA (FOOTER) - AZUL MARINO PROFUNDO (#0A192F)
+   ========================================================= */
+footer {
+  background: var(--navy-dark);
+  color: var(--text-light);
+  padding: 3rem 0 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  color: #FFFFFF;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.footer-brand span {
+  color: var(--emerald);
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.footer-links a {
+  color: #94A3B8;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--emerald);
+}
+
+.socials {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.socials a {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #CBD5E1;
+  transition: all 0.25s ease;
+}
+
+.socials a:hover {
+  background: var(--emerald);
+  color: var(--navy-deep);
+  border-color: var(--emerald);
+  transform: translateY(-3px);
+}
+
+.copyright {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.25rem;
+  margin-top: 2rem;
+  font-size: 0.76rem;
+  color: #64748B;
+}
+
+/* =========================================================
+   ANIMACIONES Y RESPONSIVE
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.12s; }
+.delay-2 { transition-delay: 0.22s; }
+.delay-3 { transition-delay: 0.32s; }
+
+@keyframes floatCard1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+@keyframes floatCard2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes growBar {
+  from { transform: scaleY(0.08); opacity: 0.3; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes pulseEmerald {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+  .hero-content {
+    text-align: center;
+  }
+  .hero-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-bullets {
+    justify-content: center;
+  }
+  .hero-trust-bar {
+    justify-content: center;
+  }
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .view-card {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-inner {
+    min-height: 70px;
+  }
+  .menu-btn {
+    display: block;
+  }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: var(--navy-deep);
+    padding: 1.2rem 5% 1.5rem;
+    border-bottom: 1px solid var(--border-navy);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.2rem;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-links a:not(.btn) {
+    padding: 0.8rem 0.4rem;
+  }
+  .nav-links .btn {
+    margin-top: 0.6rem;
+  }
+  .hero {
+    padding: 4rem 0 3.5rem;
+  }
+  .metric-card-top {
+    top: -16px;
+    right: -8px;
+  }
+  .metric-card-bottom {
+    bottom: -16px;
+    left: -8px;
+  }
+  .floating-chip-pill {
+    display: none;
+  }
+  .tech-grid,
+  .mv-grid,
+  .about-inner,
+  .view-card,
+  .download-panel,
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+  .benefit-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .presentation-tabs {
+    grid-template-columns: 1fr;
+  }
+  .footer-top {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-links {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-actions .btn {
+    width: 100%;
+  }
+  .cards-grid,
+  .benefit-grid {
+    grid-template-columns: 1fr;
+  }
+  .mock-kpis {
+    grid-template-columns: 1fr;
+  }
+  .floating-metric-card {
+    padding: 0.75rem 0.9rem;
+    gap: 0.6rem;
+  }
+  .metric-icon-circle {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  .metric-num {
+    font-size: 1.2rem;
+  }
+  .metric-title {
+    font-size: 0.75rem;
+  }
+  .metric-sub {
+    font-size: 0.64rem;
+  }
+  .contact-buttons .btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     BARRA SUPERIOR (NAVBAR)
+     ========================================================= -->
+<header class="navbar">
+  <div class="container nav-inner">
+    <a class="logo" href="#inicio" aria-label="StockPOS, volver al inicio">
+      <img src="https://uploads.onecompiler.io/44rr6xv3d/1792545949801/logo%20stock%C3%82%C2%B4ps.png" alt="Logotipo de StockPOS" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+      <span class="logo-mark" style="display:none"><i class="fa-solid fa-cubes-stacked"></i></span>
+      <span>
+        <span class="brand">Stock<span>POS</span></span>
+        <span class="slogan">Tu negocio en orden, tus ventas al instante.</span>
+      </span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#mision-vision">Nosotros</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#vistas">Vistas</a>
+      <a href="#comentarios">Opiniones</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#descargar" class="btn btn-emerald"><i class="fa-solid fa-download"></i> Descargar</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+<main>
+  <!-- =========================================================
+       SECCIÓN HERO PRINCIPAL (#INICIO) - DISEÑO COMERCIAL DE IMPACTO
+       ========================================================= -->
+  <section class="hero" id="inicio">
+    <div class="hero-grid-pattern"></div>
+    <div class="hero-glow-blob"></div>
+    <div class="hero-glow-blob-2"></div>
+    
+    <div class="container hero-grid">
+      <!-- LADO IZQUIERDO: TEXTO Y ACCIONES -->
+      <div class="hero-content reveal">
+        <!-- Subtítulo / Badge Superior -->
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>SISTEMA DE PUNTO DE VENTA INTELIGENTE</span>
+        </div>
+
+        <!-- Título Principal Grande con Resaltado en Verde Esmeralda -->
+        <h1 class="hero-title">
+          Tu negocio en orden, <span class="highlight-emerald">tus ventas al instante.</span>
+        </h1>
+
+        <!-- Párrafo Descriptivo para Pequeños y Medianos Comercios -->
+        <p class="hero-desc">
+          El software de punto de venta e inventario diseñado para pequeños y medianos comercios. Centraliza tu inventario en tiempo real, agiliza tus cobros en segundos y toma decisiones con reportes visuales de alto impacto.
+        </p>
+
+        <!-- Botones de Acción Doble -->
+        <div class="hero-actions">
+          <a class="btn btn-emerald" href="#contacto">
+            <i class="fa-solid fa-calendar-check"></i> Solicitar Demostración
+          </a>
+          <button type="button" class="btn btn-video" id="openVideoBtn" aria-haspopup="dialog" aria-expanded="false">
+            <span class="btn-video-icon"><i class="fa-solid fa-play"></i></span>
+            <span>Ver Demostración</span>
+          </button>
+        </div>
+
+        <!-- Bullets rápidos de valor -->
+        <div class="hero-bullets">
+          <span><i class="fa-solid fa-circle-check"></i> Control total de inventario</span>
+          <span><i class="fa-solid fa-circle-check"></i> Cobros rápidos y seguros</span>
+          <span><i class="fa-solid fa-circle-check"></i> Reportes en la nube</span>
+        </div>
+
+        <!-- Barra Inferior de Confianza -->
+        <div class="hero-trust-bar">
+          <div class="trust-avatars">
+            <span class="trust-avatar" title="Boutiques"><i class="fa-solid fa-store"></i></span>
+            <span class="trust-avatar" title="Minimarkets"><i class="fa-solid fa-shop"></i></span>
+            <span class="trust-avatar" title="Farmacias y Comercios"><i class="fa-solid fa-basket-shopping"></i></span>
+            <span class="trust-avatar-more">+500</span>
+          </div>
+          <div class="trust-text-group">
+            <div class="trust-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <span class="trust-stars-val">4.9 / 5</span>
+            </div>
+            <span class="trust-label">Una red de negocios que confían en nosotros</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LADO DERECHO: ILUSTRACIÓN Y MÉTRICAS FLOTANTES -->
+      <div class="hero-visual reveal delay-1">
+        <div class="mockup-wrapper">
+          <!-- Gráfico Principal: Mockup del Sistema StockPOS -->
+          <div class="pos-mockup" aria-label="Demostración visual del sistema StockPOS">
+            <!-- Barra superior estilo terminal -->
+            <div class="mock-topbar">
+              <div class="mock-window-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="mock-system-title">
+                <img src="https://uploads.onecompiler.io/44rr6xv3d/1792545949801/logo%20stock%C3%82%C2%B4ps.png" alt="StockPOS" onerror="this.style.display='none'">
+                <span>Stock<strong>POS</strong> Pro Terminal</span>
+              </div>
+              <div class="mock-status-pill">
+                <span class="online-dot"></span> EN LÍNEA
+              </div>
+            </div>
+
+            <!-- Contenido del Mockup -->
+            <div class="mock-body">
+              <!-- Métricas Rápidas Superiores -->
+              <div class="mock-kpis">
+                <div class="mock-kpi-card">
+                  <span class="kpi-label"><i class="fa-solid fa-chart-line text-emerald"></i> Ventas del Día</span>
+                  <strong class="kpi-value">$8,450.00</strong>
+                  <span class="kpi-change"><i class="fa-solid fa-arrow-up"></i> +18.4% vs ayer</span>
+                </div>
+                <div class="mock-kpi-card">
+                  <span class="kpi-label"><i class="fa-solid fa-receipt text-emerald"></i> Cobros en Caja</span>
+                  <strong class="kpi-value">142 tickets</strong>
+                  <span class="kpi-change"><i class="fa-solid fa-bolt"></i> 100% exitosos</span>
+                </div>
+              </div>
+
+              <!-- Terminal de Cobro en Vivo -->
+              <div class="mock-pos-terminal">
+                <div class="terminal-header">
+                  <span><strong><i class="fa-solid fa-cart-shopping text-emerald"></i> Venta Activa #1042</strong></span>
+                  <span>12:45 PM · Caja 01</span>
+                </div>
+                <div class="cart-item-row">
+                  <span><i class="fa-solid fa-barcode"></i> Refresco 600 ml (x2)</span>
+                  <span class="cart-item-price">$40.00</span>
+                </div>
+                <div class="cart-item-row">
+                  <span><i class="fa-solid fa-barcode"></i> Botana Mixta 150g (x1)</span>
+                  <span class="cart-item-price">$25.00</span>
+                </div>
+                <div class="cart-item-row">
+                  <span><i class="fa-solid fa-barcode"></i> Leche Entera 1 L (x1)</span>
+                  <span class="cart-item-price">$28.00</span>
+                </div>
+                <div class="terminal-total-row">
+                  <div>
+                    <span class="total-txt">Total a cobrar</span>
+                    <div class="total-amt">$93.00</div>
+                  </div>
+                  <button type="button" class="btn-mock-charge"><i class="fa-solid fa-credit-card"></i> Cobrar (F12)</button>
+                </div>
+              </div>
+
+              <!-- Mini gráfico semanal -->
+              <div class="mock-sales-chart">
+                <div class="chart-header">
+                  <span>Actividad semanal de ventas</span>
+                  <span style="color:var(--emerald-light)">Picos en horas pico</span>
+                </div>
+                <div class="chart-bars-wrap">
+                  <span title="Lunes"></span>
+                  <span title="Martes"></span>
+                  <span title="Miércoles"></span>
+                  <span title="Jueves"></span>
+                  <span title="Viernes"></span>
+                  <span title="Sábado"></span>
+                  <span title="Domingo"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TARJETAS FLOTANTES DE MÉTRICAS -->
+          <!-- Tarjeta 1: Arriba a la derecha (98% Eficiencia en caja) -->
+          <div class="floating-metric-card metric-card-top">
+            <div class="metric-icon-circle">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="metric-data">
+              <span class="metric-num">98%</span>
+              <strong class="metric-title">Eficiencia en caja</strong>
+              <span class="metric-sub"><i class="fa-solid fa-stopwatch"></i> Cobros en &lt; 5 seg</span>
+            </div>
+          </div>
+
+          <!-- Tarjeta 2: Abajo a la izquierda (100% Sincronizado en la nube) -->
+          <div class="floating-metric-card metric-card-bottom">
+            <div class="metric-icon-circle">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <div class="metric-data">
+              <span class="metric-num">100%</span>
+              <strong class="metric-title">Sincronizado en la nube</strong>
+              <span class="metric-sub"><i class="fa-solid fa-shield-halved"></i> Cero pérdida de datos</span>
+            </div>
+          </div>
+
+          <!-- Tarjeta 3: Pill flotante de estado -->
+          <div class="floating-chip-pill">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Inventario sincronizado 24/7</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER DE ANUNCIOS / COMUNICADOS -->
+  <div class="anuncios" aria-label="Comunicados y avisos">
+    <img src="https://uploads.onecompiler.io/456xy997m/1792763377842/WhatsApp%20Image%202026-10-23%20at%207.49.11%20AM.jpeg" class="active" alt="Anuncio 1">
+    <img src="https://uploads.onecompiler.io/456xy997m/1792763643264/WhatsApp%20Image%202026-10-23%20at%207.53.47%20AM.jpeg" alt="Anuncio 2">
+  </div>
+
+  <!-- =========================================================
+       SECCIÓN NOSOTROS (MISIÓN Y VISIÓN) - FONDO GENERAL CLARO
+       ========================================================= -->
+  <section class="mv-section" id="mision-vision">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="kicker">Lo que nos impulsa</div>
+        <h2>Una visión clara. <span class="text-emerald">Una misión que suma.</span></h2>
+        <p>En StockPOS creemos que administrar un negocio puede ser más sencillo, organizado y accesible.</p>
+      </div>
+      <div class="mv-grid">
+        <article class="mv-card reveal">
+          <div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>Nuestra misión</h3>
+          <p>Proporcionar a pequeños y medianos comercios una herramienta tecnológica de punto de venta moderna, intuitiva y accesible que simplifique la administración de inventarios, optimice los cobros diarios y facilite la toma de decisiones.</p>
+        </article>
+        <article class="mv-card reveal delay-1">
+          <div class="mv-icon"><i class="fa-solid fa-rocket"></i></div>
+          <h3>Nuestra visión</h3>
+          <p>Ser un sistema de gestión preferido por boutiques, comercios y negocios independientes, reconocido por combinar una experiencia visual cuidada, eficiencia operativa y una gestión responsable de la información.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ENFOQUE TECNOLÓGICO
+       ========================================================= -->
+  <section class="tech-strip" aria-label="Enfoque de StockPOS">
+    <div class="container tech-grid">
+      <article class="tech-item reveal">
+        <span class="tech-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <div>
+          <strong>Acceso organizado</strong>
+          <p>Una experiencia pensada para separar y ordenar las tareas del negocio.</p>
+        </div>
+      </article>
+      <article class="tech-item reveal delay-1">
+        <span class="tech-icon"><i class="fa-solid fa-chart-line"></i></span>
+        <div>
+          <strong>Información visual</strong>
+          <p>Indicadores y resúmenes ilustrativos para entender mejor la actividad.</p>
+        </div>
+      </article>
+      <article class="tech-item reveal delay-2">
+        <span class="tech-icon"><i class="fa-solid fa-laptop"></i></span>
+        <div>
+          <strong>Diseño adaptable</strong>
+          <p>Una página preparada para verse con total nitidez en computadora, tablet y celular.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONOCE STOCKPOS - FRANJA MARINO CORPORATIVO
+       ========================================================= -->
+  <section class="about-strip">
+    <div class="container about-inner reveal">
+      <div>
+        <div class="kicker" style="color:var(--emerald-light)">Conoce StockPOS</div>
+        <h2>Menos enredos en tu día.<br><span>Más tiempo para crecer.</span></h2>
+      </div>
+      <div>
+        <p>StockPOS está pensado para centralizar tareas importantes del negocio en un mismo lugar: desde registrar productos hasta revisar cómo van las ventas en tiempo real.</p>
+        <div class="about-pills">
+          <span><i class="fa-solid fa-bag-shopping"></i> Comercios</span>
+          <span><i class="fa-solid fa-store"></i> Emprendimientos</span>
+          <span><i class="fa-solid fa-laptop"></i> Interfaz moderna</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FUNCIONES ESENCIALES - FONDO BLANCO
+       ========================================================= -->
+  <section class="features-section" id="funciones">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="kicker">Herramientas esenciales</div>
+        <h2>Todo lo que tu negocio necesita</h2>
+        <p>Funciones organizadas para que el trabajo diario sea más práctico y productivo.</p>
+      </div>
+      <div class="cards-grid">
+        <article class="feature-card reveal">
+          <span class="num-tag">01</span>
+          <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+          <h3>Punto de venta</h3>
+          <p>Registra compras, administra el carrito y consulta el total de cada operación con máxima claridad.</p>
+          <span class="tag">RÁPIDO · PRÁCTICO</span>
+        </article>
+        <article class="feature-card reveal delay-1">
+          <span class="num-tag">02</span>
+          <div class="card-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+          <h3>Inventario y productos</h3>
+          <p>Organiza por categorías, actualiza precios y detecta productos que necesitan reabastecimiento.</p>
+          <span class="tag">ORDENA · SUPERVISA</span>
+        </article>
+        <article class="feature-card reveal delay-2">
+          <span class="num-tag">03</span>
+          <div class="card-icon"><i class="fa-solid fa-chart-column"></i></div>
+          <h3>Reportes y dashboard</h3>
+          <p>Consulta resúmenes de ventas y observa tendencias para apoyar tus decisiones financieras.</p>
+          <span class="tag">ANALIZA · MEJORA</span>
+        </article>
+        <article class="feature-card reveal delay-3">
+          <span class="num-tag">04</span>
+          <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Acceso y seguridad</h3>
+          <p>Diseñado para organizar el acceso de usuarios y proteger la información confidencial de tu comercio.</p>
+          <span class="tag">ACCESO · CONTROL</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VISTAS DEL SISTEMA - FONDO CLARO
+       ========================================================= -->
+  <section class="views-section" id="vistas">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="kicker">Así se vería</div>
+        <h2>Cuatro vistas principales, <span class="text-emerald">todo más organizado</span></h2>
+        <p>Prototipos ilustrativos de las pantallas principales de StockPOS.</p>
+      </div>
+      <div class="view-list">
+        <!-- Vista 1: Login -->
+        <article class="view-card reveal">
+          <div class="view-copy">
+            <div class="view-title">
+              <span class="view-number">1</span>
+              <h3>Inicio de sesión</h3>
+            </div>
+            <p>Un acceso claro y protegido para que cada usuario entre a su cuenta con su perfil correspondiente.</p>
+            <ul>
+              <li><i class="fa-solid fa-check-circle"></i> Acceso con correo y contraseña</li>
+              <li><i class="fa-solid fa-check-circle"></i> Recuperación de contraseña segura</li>
+              <li><i class="fa-solid fa-check-circle"></i> Interfaz sencilla y accesible</li>
+              <li><i class="fa-solid fa-check-circle"></i> Preparado para distintos dispositivos</li>
+            </ul>
+          </div>
+          <div class="preview">
+            <div class="preview-head">
+              <strong><i class="fa-solid fa-shield-halved text-emerald"></i> Acceso StockPOS</strong>
+              <span>Vista de ejemplo</span>
+            </div>
+            <div class="login-form">
+              <div class="mini-logo"><i class="fa-solid fa-cubes-stacked text-emerald"></i> Stock<span>POS</span></div>
+              <p style="font-size:.75rem;color:#CBD5E1">Bienvenido de nuevo</p>
+              <div class="fake-input"><i class="fa-regular fa-envelope"></i> &nbsp; Correo electrónico</div>
+              <div class="fake-input"><i class="fa-solid fa-lock"></i> &nbsp; Contraseña</div>
+              <div class="fake-button">Iniciar sesión</div>
+              <p style="font-size:.65rem;color:#94A3B8;margin-top:.7rem">¿Olvidaste tu contraseña?</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vista 2: Punto de venta -->
+        <article class="view-card reveal">
+          <div class="view-copy">
+            <div class="view-title">
+              <span class="view-number">2</span>
+              <h3>Punto de venta</h3>
+            </div>
+            <p>Una pantalla pensada para agilizar el cobro y mantener los importes y productos siempre visibles.</p>
+            <ul>
+              <li><i class="fa-solid fa-check-circle"></i> Productos y precios a la vista</li>
+              <li><i class="fa-solid fa-check-circle"></i> Resumen de compra instantáneo</li>
+              <li><i class="fa-solid fa-check-circle"></i> Total claro antes de cobrar</li>
+            </ul>
+          </div>
+          <div class="preview">
+            <div class="preview-head">
+              <strong><i class="fa-solid fa-cart-shopping text-emerald"></i> Punto de venta</strong>
+              <span>Caja · Vista demo</span>
+            </div>
+            <table class="products">
+              <thead>
+                <tr><th>Producto</th><th>Cant.</th><th>Precio</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Refresco 600 ml</td><td>2</td><td>$40.00</td></tr>
+                <tr><td>Botanas</td><td>1</td><td>$18.00</td></tr>
+                <tr><td>Leche 1 L</td><td>1</td><td>$26.00</td></tr>
+              </tbody>
+            </table>
+            <div style="display:flex;justify-content:space-between;padding:1rem .3rem .3rem;font-size:.8rem">
+              <span style="color:#CBD5E1">Total de ejemplo</span>
+              <strong style="color:var(--emerald-light);font-size:1.2rem">$84.00</strong>
+            </div>
+            <div class="fake-button">Continuar con el cobro</div>
+          </div>
+        </article>
+
+        <!-- Vista 3: Inventario -->
+        <article class="view-card reveal">
+          <div class="view-copy">
+            <div class="view-title">
+              <span class="view-number">3</span>
+              <h3>Inventario y productos</h3>
+            </div>
+            <p>Visualiza el estado de los artículos y encuentra rápidamente lo que necesitas abastecer.</p>
+            <ul>
+              <li><i class="fa-solid fa-check-circle"></i> Organización por categorías</li>
+              <li><i class="fa-solid fa-check-circle"></i> Indicadores visuales de existencias</li>
+              <li><i class="fa-solid fa-check-circle"></i> Gestión rápida de catálogo</li>
+            </ul>
+          </div>
+          <div class="preview">
+            <div class="preview-head">
+              <strong><i class="fa-solid fa-boxes-stacked text-emerald"></i> Inventario</strong>
+              <span>Datos de ejemplo</span>
+            </div>
+            <table class="products">
+              <thead>
+                <tr><th>Producto</th><th>Stock</th><th>Estado</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Refresco 600 ml</td><td>85</td><td><span class="status">Disponible</span></td></tr>
+                <tr><td>Botanas</td><td>12</td><td><span class="status warn">Stock bajo</span></td></tr>
+                <tr><td>Leche 1 L</td><td>4</td><td><span class="status low">Por revisar</span></td></tr>
+                <tr><td>Aceite 850 ml</td><td>28</td><td><span class="status">Disponible</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- Vista 4: Reportes -->
+        <article class="view-card reveal">
+          <div class="view-copy">
+            <div class="view-title">
+              <span class="view-number">4</span>
+              <h3>Reportes y dashboard</h3>
+            </div>
+            <p>Un resumen visual de la actividad diaria y mensual para consultar el rendimiento de tu negocio.</p>
+            <ul>
+              <li><i class="fa-solid fa-check-circle"></i> Resúmenes automáticos por periodo</li>
+              <li><i class="fa-solid fa-check-circle"></i> Gráficas de ventas y tendencias</li>
+              <li><i class="fa-solid fa-check-circle"></i> Información útil para decidir</li>
+            </ul>
+          </div>
+          <div class="preview">
+            <div class="preview-head">
+              <strong><i class="fa-solid fa-chart-line text-emerald"></i> Resumen de ventas</strong>
+              <span>Demo ilustrativa</span>
+            </div>
+            <div class="preview-stats">
+              <div class="preview-stat"><small>Hoy</small><strong>$5,420</strong></div>
+              <div class="preview-stat"><small>Esta semana</small><strong>$28,450</strong></div>
+              <div class="preview-stat"><small>Este mes</small><strong>$112,300</strong></div>
+            </div>
+            <div style="margin-top:.85rem">
+              <div class="chart-header">
+                <span>Actividad semanal</span>
+                <span style="color:var(--emerald-light)">7 días</span>
+              </div>
+              <div class="mini-chart">
+                <i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       BENEFICIOS - FRANJA AZUL MARINO PROFUNDO
+       ========================================================= -->
+  <section class="benefits" id="beneficios">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="kicker" style="color:var(--emerald-light)">¿Por qué StockPOS?</div>
+        <h2>Hecho para acompañar el crecimiento de tu negocio</h2>
+        <p>Una experiencia pensada para combinar claridad, organización y facilidad de uso.</p>
+      </div>
+      <div class="benefit-grid">
+        <article class="benefit reveal">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <h3>Fácil de usar</h3>
+          <p>Una interfaz ordenada para localizar funciones y cobrar sin complicaciones técnicas.</p>
+        </article>
+        <article class="benefit reveal delay-1">
+          <i class="fa-solid fa-box-open"></i>
+          <h3>Inventario organizado</h3>
+          <p>Consulta existencias, detecta mermas y mantén tus productos perfectamente clasificados.</p>
+        </article>
+        <article class="benefit reveal delay-2">
+          <i class="fa-solid fa-chart-simple"></i>
+          <h3>Información visual</h3>
+          <p>Comprende la actividad mediante indicadores en tiempo real y gráficas claras.</p>
+        </article>
+        <article class="benefit reveal">
+          <i class="fa-solid fa-users"></i>
+          <h3>Gestión de usuarios</h3>
+          <p>Una estructura pensada para diferenciar perfiles y responsabilidades de cajeros y administradores.</p>
+        </article>
+        <article class="benefit reveal delay-1">
+          <i class="fa-solid fa-cloud"></i>
+          <h3>Preparado para la nube</h3>
+          <p>Respaldo continuo para que tu información comercial esté siempre protegida y disponible.</p>
+        </article>
+        <article class="benefit reveal delay-2">
+          <i class="fa-solid fa-store"></i>
+          <h3>Enfoque en el comercio</h3>
+          <p>Funciones centradas 100% en las necesidades cotidianas de los negocios locales.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       DESCARGA / SOLICITUD
+       ========================================================= -->
+  <section class="download-section" id="descargar">
+    <div class="container">
+      <div class="download-panel reveal">
+        <div>
+          <div class="kicker" style="color:var(--emerald-light)">Da el siguiente paso</div>
+          <h2>Tu negocio, más organizado.<br><span>Tu siguiente etapa comienza aquí.</span></h2>
+          <p>¿Quieres conocer StockPOS de cerca? Ponte en contacto con el equipo para obtener información sobre la disponibilidad de la aplicación y una demostración guiada.</p>
+          <div class="download-actions">
+            <a class="btn btn-emerald" href="#contacto"><i class="fa-solid fa-paper-plane"></i> Solicitar información</a>
+            <a class="btn btn-outline-navy" href="#vistas"><i class="fa-regular fa-eye"></i> Ver las vistas</a>
+          </div>
+          <p class="download-note">Compatible con Windows y dispositivos con navegador moderno.</p>
+        </div>
+        <div class="download-art">
+          <div class="app-icon"><i class="fa-solid fa-cubes-stacked"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       OPINIONES / RESEÑAS - FONDO CLARO
+       ========================================================= -->
+  <section class="reviews" id="comentarios">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="kicker">Comentarios</div>
+        <h2>Una experiencia hecha para el día a día</h2>
+        <p>Espacio para compartir opiniones y experiencias de uso de StockPOS.</p>
+      </div>
+      <div class="review-grid">
+        <article class="review reveal">
+          <div class="review-top">
+            <div class="avatar"><img src="https://uploads.onecompiler.io/44rr6xv3d/1792545220082/user1.jpg" alt="Avatar de emprendimiento local"></div>
+            <div>
+              <strong>Emprendimiento local</strong>
+              <small>Opinión de ejemplo</small>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>“Una herramienta así puede ayudarme a llevar un registro mucho más claro de mis productos y ventas en caja.”</p>
+        </article>
+        <article class="review reveal delay-1">
+          <div class="review-top">
+            <div class="avatar"><img src="https://uploads.onecompiler.io/44rr6xv3d/1792545223065/user2.jpg" alt="Avatar de comercio independiente"></div>
+            <div>
+              <strong>Comercio independiente</strong>
+              <small>Opinión de ejemplo</small>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>“Me encanta tener las funciones principales de inventario y caja organizadas en un mismo lugar, sin complicaciones.”</p>
+        </article>
+        <article class="review reveal delay-2">
+          <div class="review-top">
+            <div class="avatar"><img src="https://uploads.onecompiler.io/44rr6xv3d/1792545225614/user3.jpg" alt="Avatar de pequeño negocio"></div>
+            <div>
+              <strong>Pequeño negocio</strong>
+              <small>Opinión de ejemplo</small>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>“Los reportes visuales y el control de inventario en tiempo real son exactamente lo que se necesita para crecer.”</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONTACTO - FRANJA AZUL MARINO PROFUNDO
+       ========================================================= -->
+  <section class="contact-wrap" id="contacto">
+    <div class="container">
+      <div class="contact reveal">
+        <div class="kicker" style="color:var(--emerald-light)">Estamos para escucharte</div>
+        <h2>¿Tienes dudas sobre StockPOS?</h2>
+        <p>Contáctanos para solicitar una demostración personalizada, compartir sugerencias o conocer más detalles de la plataforma.</p>
+        <div class="contact-buttons">
+          <a class="btn btn-wa" href="https://wa.link/ezqvn2" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-whatsapp"></i> Contactar por WhatsApp
+          </a>
+          <a class="btn btn-mail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=biancanahomy2107@gmail.com&amp;su=Informaci%C3%B3n%20sobre%20StockPOS" target="_blank" rel="noopener noreferrer">
+            <i class="fa-regular fa-envelope"></i> Enviar un correo electrónico
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- =========================================================
+     MODAL DE VIDEO / DEMOSTRACIÓN DEL SISTEMA
+     ========================================================= -->
+<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
+  <div class="video-modal-dialog">
+    <div class="video-modal-header">
+      <div class="modal-title-wrap">
+        <span class="modal-badge"><i class="fa-solid fa-circle-play"></i> Demostración Interactiva</span>
+        <h3 id="modalTitle">StockPOS en Acción · Presentación del Sistema</h3>
+      </div>
+      <button type="button" class="modal-close-btn" id="closeVideoBtn" aria-label="Cerrar modal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="video-modal-body">
+      <div class="presentation-player">
+        <div class="presentation-stage">
+          <!-- Paso 1: Cobro en Caja -->
+          <div class="demo-step active" data-step="1">
+            <span class="demo-step-badge"><i class="fa-solid fa-cash-register"></i> Módulo 1 de 3: Punto de Venta</span>
+            <h4>Cobros Rápidos y Emisión de Tickets en &lt; 5 Segundos</h4>
+            <p>Escanea códigos de barras, agrega productos con un solo clic y procesa pagos en efectivo, tarjeta o transferencias sin demoras en tu mostrador.</p>
+            <div class="step-card-preview">
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-check"></i> Escaneo rápido con lector de código de barras</span>
+                <strong style="color:var(--emerald-light)">Listo</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-check"></i> Cálculo automático de cambio e IVA</span>
+                <strong style="color:var(--emerald-light)">Automático</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-check"></i> Impresión y envío de comprobante digital</span>
+                <strong style="color:var(--emerald-light)">Instantáneo</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 2: Inventario -->
+          <div class="demo-step" data-step="2">
+            <span class="demo-step-badge"><i class="fa-solid fa-boxes-stacked"></i> Módulo 2 de 3: Inventario Inteligente</span>
+            <h4>Control de Stock en Tiempo Real y Alertas de Reabastecimiento</h4>
+            <p>Cada venta descuenta automáticamente las existencias. Recibe avisos cuando un artículo esté por agotarse y programa tus compras a proveedores.</p>
+            <div class="step-card-preview">
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-bell"></i> Alerta de stock mínimo configurable</span>
+                <strong style="color:#F59E0B">Activa</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-layer-group"></i> Categorización por departamentos y marcas</span>
+                <strong style="color:var(--emerald-light)">Organizado</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-rotate"></i> Historial de entradas y mermas</span>
+                <strong style="color:var(--emerald-light)">100% Trazable</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 3: Métricas y Nube -->
+          <div class="demo-step" data-step="3">
+            <span class="demo-step-badge"><i class="fa-solid fa-chart-line"></i> Módulo 3 de 3: Métricas y Reportes</span>
+            <h4>Dashboard Ejecutivo con Métricas en la Nube 24/7</h4>
+            <p>Monitorea las ventas del día, productos más vendidos, márgenes de utilidad y corte de caja desde cualquier dispositivo conectado.</p>
+            <div class="step-card-preview">
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-cloud-arrow-up"></i> Sincronización continua en la nube</span>
+                <strong style="color:var(--emerald-light)">En línea</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-file-invoice-dollar"></i> Reportes descargables de corte de caja</span>
+                <strong style="color:var(--emerald-light)">PDF / Excel</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-arrow-trend-up"></i> Indicadores de rentabilidad en tiempo real</span>
+                <strong style="color:var(--emerald-light)">Actualizado</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="presentation-tabs">
+          <button type="button" class="p-tab-btn active" data-target="1"><i class="fa-solid fa-cart-shopping"></i> 1. Punto de Venta</button>
+          <button type="button" class="p-tab-btn" data-target="2"><i class="fa-solid fa-boxes-stacked"></i> 2. Inventario</button>
+          <button type="button" class="p-tab-btn" data-target="3"><i class="fa-solid fa-chart-pie"></i> 3. Reportes en Nube</button>
+        </div>
+      </div>
+    </div>
+    <div class="video-modal-footer">
+      <div class="modal-footer-hint">
+        <i class="fa-solid fa-shield-halved"></i> ¿Quieres ver una demostración en vivo con tus propios productos?
+      </div>
+      <div class="modal-footer-actions">
+        <a href="#contacto" class="btn btn-emerald" id="modalContactCta"><i class="fa-solid fa-calendar-check"></i> Agendar Demostración</a>
+        <button type="button" class="btn btn-outline-navy" id="modalCloseSecondary">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     PIE DE PÁGINA (FOOTER) - AZUL MARINO PROFUNDO (#0A192F)
+     ========================================================= -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <a href="#inicio">
+        <div class="footer-brand">Stock<span>POS</span></div>
+        <div style="font-size:.74rem;color:#94A3B8;margin-top:.2rem">Tu negocio en orden, tus ventas al instante.</div>
+      </a>
+      <nav class="footer-links" aria-label="Enlaces del pie de página">
+        <a href="#inicio">Inicio</a>
+        <a href="#mision-vision">Nosotros</a>
+        <a href="#funciones">Funciones</a>
+        <a href="#vistas">Vistas</a>
+        <a href="#descargar">Descargar</a>
+        <a href="#comentarios">Opiniones</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="socials">
+        <a href="https://wa.link/ezqvn2" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=biancanahomy2107@gmail.com&amp;su=Informaci%C3%B3n%20sobre%20StockPOS" target="_blank" rel="noopener noreferrer" aria-label="Correo electrónico"><i class="fa-regular fa-envelope"></i></a>
+        <a href="#inicio" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></a>
+      </div>
+    </div>
+    <div class="copyright">
+      ©️ 2026 StockPOS — Proyecto de Desarrollo de Software. Papantla, Veracruz. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<script>
+// Menú móvil responsive
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+});
+navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  menuBtn.setAttribute('aria-expanded', 'false');
+  menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+}));
+
+// Efecto Reveal al hacer scroll
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Carrusel de Anuncios
+const anuncios = [...document.querySelectorAll('.anuncios img')].filter(img => img.getAttribute('src')?.trim());
+let anuncioActual = 0;
+if (anuncios.length > 1) {
+  setInterval(() => {
+    anuncios[anuncioActual].classList.remove('active');
+    anuncioActual = (anuncioActual + 1) % anuncios.length;
+    anuncios[anuncioActual].classList.add('active');
+  }, 5000);
+}
+
+// Modal de Demostración en Video / Presentación del Sistema
+const openVideoBtn = document.getElementById('openVideoBtn');
+const videoModal = document.getElementById('videoModal');
+const closeVideoBtn = document.getElementById('closeVideoBtn');
+const videoModalBackdrop = document.getElementById('videoModalBackdrop');
+const modalCloseSecondary = document.getElementById('modalCloseSecondary');
+const modalContactCta = document.getElementById('modalContactCta');
+
+function openDemoModal() {
+  videoModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  openVideoBtn.setAttribute('aria-expanded', 'true');
+  startPresentationTimer();
+}
+
+function closeDemoModal() {
+  videoModal.classList.remove('open');
+  document.body.style.overflow = '';
+  openVideoBtn.setAttribute('aria-expanded', 'false');
+  stopPresentationTimer();
+}
+
+if (openVideoBtn) openVideoBtn.addEventListener('click', openDemoModal);
+if (closeVideoBtn) closeVideoBtn.addEventListener('click', closeDemoModal);
+if (videoModalBackdrop) videoModalBackdrop.addEventListener('click', closeDemoModal);
+if (modalCloseSecondary) modalCloseSecondary.addEventListener('click', closeDemoModal);
+if (modalContactCta) modalContactCta.addEventListener('click', closeDemoModal);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && videoModal.classList.contains('open')) {
+    closeDemoModal();
+  }
+});
+
+// Pestañas y rotación interactiva en el reproductor de presentación
+const tabButtons = document.querySelectorAll('.p-tab-btn');
+const demoSteps = document.querySelectorAll('.demo-step');
+let currentStepIdx = 0;
+let presentationTimer = null;
+
+function setStep(index) {
+  currentStepIdx = index;
+  tabButtons.forEach((btn, i) => {
+    btn.classList.toggle('active', i === index);
+  });
+  demoSteps.forEach((step, i) => {
+    step.classList.toggle('active', i === index);
+  });
+}
+
+tabButtons.forEach((btn, idx) => {
+  btn.addEventListener('click', () => {
+    setStep(idx);
+    stopPresentationTimer();
+  });
+});
+
+function startPresentationTimer() {
+  stopPresentationTimer();
+  presentationTimer = setInterval(() => {
+    currentStepIdx = (currentStepIdx + 1) % demoSteps.length;
+    setStep(currentStepIdx);
+  }, 4200);
+}
+
+function stopPresentationTimer() {
+  if (presentationTimer) {
+    clearInterval(presentationTimer);
+    presentationTimer = null;
+  }
+}
+</script>
+</body>
+</html>

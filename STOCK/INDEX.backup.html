@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#383838">
+<title>StockPOS | Tu negocio en orden</title>
+<meta name="description" content="Conoce StockPOS, una propuesta de punto de venta con vistas de inventario, caja y reportes para pequeños y medianos comercios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{--navy:#383838;--navy2:#25473b;--green:#ca4a2f;--mint:#dfdfdf;--pink:#ca4a2f;--pinkp:#f5eeeb;--rose:#e7c6bd;--ink:#383838;--muted:#65716b;--paper:#f4f5f3;--white:#fff;--line:#dfe4df;--shadow:0 18px 55px #25473b18;--glow:0 0 35px #ca4a2f30}
+*{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}
+.container{width:min(1160px,90%);margin:auto}
+section{scroll-margin-top:92px}
+.navbar{position:sticky;top:0;z-index:1000;background:#ffffffdf;backdrop-filter:blur(18px);border-bottom:1px solid #fbcfe899}
+.nav-inner{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{display:flex;align-items:center;gap:.7rem;flex-shrink:0}
+.logo img{width:46px;height:46px;object-fit:contain;border-radius:13px}
+.logo-mark{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:var(--navy);color:var(--green);font-size:1.3rem;box-shadow:0 8px 20px #10182725}
+.brand{font-size:1.4rem;font-weight:800;letter-spacing:-.06em;color:var(--navy);line-height:1.1}.brand span{color:var(--green)}
+.slogan{font-size:.68rem;color:var(--muted);display:block;margin-top:.25rem}
+.nav-links{display:flex;align-items:center;gap:1.35rem;font-size:.84rem;font-weight:700}
+.nav-links a:not(.btn):hover{color:var(--green)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:.6rem;padding:.85rem 1.25rem;border:0;border-radius:999px;background:linear-gradient(120deg,var(--green),#059669);color:#fff;font-weight:800;font-size:.88rem;box-shadow:var(--glow);transition:transform .25s,box-shadow .25s;cursor:pointer}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px #10b98145}
+.btn-pink{background:linear-gradient(120deg,var(--pink),#db2777);box-shadow:0 10px 25px #f472b630}
+.menu-btn{display:none;background:var(--navy);color:white;border:0;width:42px;height:42px;border-radius:12px;font-size:1.1rem;cursor:pointer}
+.hero{position:relative;overflow:hidden;padding:5.5rem 0 5rem;background:radial-gradient(ellipse at 85% 20%,#fbcfe84f,transparent 30%),linear-gradient(135deg,#f8fafc 0%,#f0fdf8 56%,#fdf2f8 100%)}
+.hero:before,.contact:before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:#10b98118;filter:blur(60px);top:-130px;right:-80px;pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:3.5rem;align-items:center;position:relative;z-index:1}
+.eyebrow{display:inline-flex;gap:.5rem;align-items:center;background:#ecfdf5;border:1px solid #a7f3d0;color:#047857;border-radius:999px;padding:.45rem .85rem;font-size:.76rem;font-weight:800;margin-bottom:1.25rem}
+h1{font-size:clamp(2.5rem,5vw,4.25rem);line-height:1.12;letter-spacing:-.06em;color:var(--navy);margin-bottom:1.25rem}
+.gradient-text{background:linear-gradient(110deg,#059669,var(--green),#34d399);background-clip:text;-webkit-background-clip:text;color:transparent}
+.script{font-family:'Playfair Display',serif;color:var(--pink);font-style:italic;font-weight:600}
+.hero-desc{font-size:1.05rem;color:var(--muted);max-width:600px;margin-bottom:1.7rem}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.btn-outline{background:#fff;color:var(--navy);border:1px solid var(--line);box-shadow:var(--shadow)}
+.hero-points{display:flex;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:#475569;font-weight:700}
+.hero-points span{display:flex;align-items:center;gap:.45rem}.hero-points i{color:var(--green)}
+.dashboard{background:var(--navy);border:1px solid #ffffff20;border-radius:26px;padding:1.4rem;color:white;box-shadow:0 30px 65px #10182730;position:relative;animation:float 6s ease-in-out infinite}
+.mock-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff19;padding-bottom:1rem;margin-bottom:1rem;font-size:.76rem;color:#cbd5e1}
+.dots{display:flex;gap:5px}.dots i{width:9px;height:9px;border-radius:50%;display:block;background:#f87171}.dots i:nth-child(2){background:#fbbf24}.dots i:nth-child(3){background:var(--green)}
+.dash-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}.dash-title strong{font-size:1rem}.live{font-size:.65rem;color:var(--mint);background:#10b98120;border:1px solid #10b98150;padding:.25rem .5rem;border-radius:20px}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem}
+.stat{background:#ffffff0b;border:1px solid #ffffff14;border-radius:15px;padding:1rem}.stat small{color:#aab7c9;font-size:.7rem}.stat strong{display:block;font-size:1.35rem;margin:.2rem 0;color:var(--mint)}.stat em{font-size:.68rem;color:#86efac;font-style:normal}
+.chart{margin-top:.8rem;padding:1rem;background:#ffffff08;border:1px solid #ffffff12;border-radius:15px}.chart-top{display:flex;justify-content:space-between;font-size:.75rem;color:#cbd5e1}.bars{height:100px;display:flex;align-items:end;gap:9px;padding:1rem .25rem .1rem;border-bottom:1px solid #ffffff20}.bars span{flex:1;border-radius:7px 7px 2px 2px;background:linear-gradient(0deg,#059669,var(--mint));animation:grow 1.2s ease both;transform-origin:bottom}.bars span:nth-child(1){height:38%}.bars span:nth-child(2){height:60%}.bars span:nth-child(3){height:46%}.bars span:nth-child(4){height:75%}.bars span:nth-child(5){height:90%}.bars span:nth-child(6){height:64%}.bars span:nth-child(7){height:98%}
+.float-chip{position:absolute;right:-22px;bottom:35px;background:#fff;color:var(--ink);padding:.85rem 1rem;border-radius:15px;box-shadow:var(--shadow);font-size:.76rem;font-weight:800;animation:float 5s ease-in-out infinite reverse}.float-chip i{color:var(--green);margin-right:.4rem}
+.mv-section{padding:5rem 0 4rem}.section-heading{text-align:center;max-width:720px;margin:0 auto 2.6rem}.kicker{font-size:.74rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#059669;margin-bottom:.6rem}.section-heading h2{font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.2;letter-spacing:-.045em;color:var(--navy)}.section-heading p{color:var(--muted);margin-top:.8rem}
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem}
+.mv-card{background:#fff;padding:2rem;border:1px solid var(--rose);border-radius:24px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}.mv-card:hover{transform:translateY(-7px);box-shadow:0 24px 50px #10182714}.mv-card:before{content:"";position:absolute;left:0;top:0;width:100%;height:5px;background:linear-gradient(90deg,var(--green),var(--pink))}.mv-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:#ecfdf5;color:#059669;font-size:1.35rem;margin-bottom:1rem}.mv-card:nth-child(2) .mv-icon{background:var(--pinkp);color:#db2777}.mv-card h3{font-size:1.35rem;color:var(--navy);margin-bottom:.6rem}.mv-card p{color:var(--muted);font-size:.94rem}
+
+.tech-strip{padding:1.2rem 0;background:#fff;border-bottom:1px solid var(--line)}
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.tech-item{display:flex;align-items:center;gap:.9rem;padding:1rem;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,#fff,#f8fafc);transition:transform .25s,border-color .25s,box-shadow .25s}
+.tech-item:hover{transform:translateY(-4px);border-color:#a7f3d0;box-shadow:var(--shadow)}
+.tech-icon{width:46px;height:46px;flex-shrink:0;display:grid;place-items:center;border-radius:14px;background:#ecfdf5;color:#059669;font-size:1.15rem}
+.tech-item strong{display:block;color:var(--navy);font-size:.88rem}
+.tech-item p{font-size:.76rem;color:var(--muted);line-height:1.5;margin-top:.2rem}
+
+.about-strip{background:var(--navy);color:white;padding:3rem 0;position:relative;overflow:hidden}.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}.about-inner h2{font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.2}.about-inner h2 span{color:var(--mint)}.about-inner p{color:#bdc8d7}.about-pills{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.3rem}.about-pills span{padding:.45rem .75rem;border:1px solid #ffffff20;background:#ffffff09;border-radius:999px;font-size:.75rem}
+.features-section{padding:5rem 0}.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}.feature-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:1.7rem 1.35rem;position:relative;overflow:hidden;box-shadow:var(--shadow);transition:all .3s}.feature-card:hover{transform:translateY(-8px);border-color:#6ee7b7;box-shadow:0 20px 40px #10b98118}.num-tag{position:absolute;top:14px;right:15px;font-size:.72rem;font-weight:800;color:#db2777;background:var(--pinkp);border:1px solid var(--rose);border-radius:50%;width:29px;height:29px;display:grid;place-items:center}.card-icon{width:56px;height:56px;border-radius:17px;display:grid;place-items:center;background:#ecfdf5;color:#059669;font-size:1.55rem;margin-bottom:1.2rem}.feature-card:nth-child(even) .card-icon{background:var(--pinkp);color:#db2777}.feature-card h3{font-size:1.05rem;color:var(--navy);margin-bottom:.6rem}.feature-card p{font-size:.85rem;color:var(--muted)}.tag{display:inline-block;margin-top:1.1rem;padding:.35rem .65rem;background:#f0fdf4;color:#047857;border-radius:99px;font-size:.65rem;font-weight:800;letter-spacing:.04em}
+.views-section{background:#eef2f7;padding:5rem 0}.view-list{display:grid;gap:1.4rem}.view-card{display:grid;grid-template-columns:.85fr 1.15fr;gap:2rem;align-items:center;background:#fff;padding:2rem;border:1px solid #e2e8f0;border-radius:25px;box-shadow:var(--shadow);transition:transform .3s}.view-card:hover{transform:translateY(-4px)}.view-title{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}.view-number{width:43px;height:43px;flex-shrink:0;border-radius:14px;background:linear-gradient(135deg,var(--green),#059669);display:grid;place-items:center;color:white;font-weight:800;box-shadow:var(--glow)}.view-copy h3{font-size:1.35rem;color:var(--navy);line-height:1.2}.view-copy p{color:var(--muted);font-size:.9rem;margin:.7rem 0}.view-copy ul{list-style:none;display:grid;gap:.5rem;font-size:.83rem;color:#475569}.view-copy li i{color:#059669;margin-right:.5rem}.preview{background:var(--navy);color:white;border-radius:19px;padding:1.25rem;min-width:0;overflow:hidden}.preview-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid #ffffff18;padding-bottom:.8rem;margin-bottom:.9rem;font-size:.8rem}.preview-head strong{color:white}.preview-head span{color:#9caec3;font-size:.68rem}.login-form{max-width:360px;margin:.5rem auto;padding:1.2rem;background:#1e293b;border:1px solid #334155;border-radius:14px;text-align:center}.mini-logo{font-size:1.1rem;font-weight:800;color:var(--mint);margin-bottom:.8rem}.fake-input{padding:.65rem .75rem;background:#101827;border:1px solid #334155;color:#94a3b8;border-radius:8px;text-align:left;font-size:.72rem;margin:.55rem 0}.fake-button{background:var(--green);color:#06281c;border-radius:8px;padding:.65rem;font-size:.72rem;font-weight:800;margin-top:.6rem}.products{width:100%;border-collapse:collapse;font-size:.68rem}.products th{text-align:left;color:#91a0b4;font-weight:600;padding:.6rem .4rem;border-bottom:1px solid #ffffff20}.products td{padding:.75rem .4rem;border-bottom:1px solid #ffffff10;color:#dbe5f1}.status{padding:.22rem .4rem;border-radius:6px;background:#10b98125;color:#6ee7b7;font-size:.61rem;white-space:nowrap}.status.warn{background:#f59e0b20;color:#fcd34d}.status.low{background:#f472b620;color:#f9a8d4}.preview-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}.preview-stat{padding:.75rem;background:#ffffff0a;border:1px solid #ffffff12;border-radius:12px}.preview-stat small{font-size:.63rem;color:#9caec3;display:block}.preview-stat strong{font-size:.88rem;color:var(--mint)}.mini-chart{height:85px;display:flex;align-items:end;gap:7px;padding:.6rem .2rem 0}.mini-chart i{flex:1;display:block;background:linear-gradient(0deg,#059669,var(--mint));border-radius:5px 5px 0 0;animation:grow 1.3s ease both}.mini-chart i:nth-child(1){height:35%}.mini-chart i:nth-child(2){height:55%}.mini-chart i:nth-child(3){height:43%}.mini-chart i:nth-child(4){height:80%}.mini-chart i:nth-child(5){height:65%}.mini-chart i:nth-child(6){height:95%}
+.benefits{padding:5rem 0;background:var(--navy);color:white;position:relative;overflow:hidden}.benefits .section-heading h2{color:white}.benefits .section-heading p{color:#aab7c9}.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.benefit{border:1px solid #ffffff15;background:#ffffff08;border-radius:19px;padding:1.4rem;transition:all .3s}.benefit:hover{background:#ffffff10;border-color:#10b98180;transform:translateY(-5px)}.benefit i{font-size:1.4rem;color:var(--mint);margin-bottom:.8rem}.benefit h3{font-size:.98rem;margin-bottom:.35rem}.benefit p{font-size:.82rem;color:#aab7c9}
+.download-section{padding:5rem 0}.download-panel{position:relative;overflow:hidden;display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center;background:linear-gradient(120deg,var(--navy),#1c3441);color:white;border-radius:30px;padding:3rem;box-shadow:0 25px 60px #10182720}.download-panel:after{content:"";position:absolute;right:-70px;top:-100px;width:280px;height:280px;border-radius:50%;background:#f472b628;filter:blur(10px)}.download-panel h2{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.2;letter-spacing:-.04em;position:relative;z-index:1}.download-panel h2 span{color:var(--mint)}.download-panel p{color:#bdc8d7;margin:1rem 0 1.5rem;max-width:600px;position:relative;z-index:1}.download-actions{display:flex;gap:.8rem;flex-wrap:wrap;position:relative;z-index:1}.download-art{position:relative;z-index:1;display:grid;place-items:center;min-height:180px}.download-art .app-icon{width:145px;height:145px;border-radius:34px;display:grid;place-items:center;background:linear-gradient(135deg,#10b981,#34d399);color:#08251b;font-size:4rem;box-shadow:0 0 55px #10b98150;transform:rotate(-8deg);animation:float 5s ease-in-out infinite}.download-note{font-size:.72rem!important;margin-top:1rem!important}
+.reviews{padding:4.5rem 0;background:linear-gradient(135deg,#fff,#fdf2f8)}.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.review{background:#fff;border:1px solid var(--rose);border-radius:20px;padding:1.4rem;box-shadow:var(--shadow);transition:transform .3s}.review:hover{transform:translateY(-5px)}.review-top{display:flex;align-items:center;gap:.75rem;margin-bottom:.8rem}.avatar{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:#ecfdf5;color:#047857;font-weight:800;overflow:hidden;flex-shrink:0}.avatar img{width:100%;height:100%;object-fit:cover;display:block}.review:nth-child(2) .avatar{background:var(--pinkp);color:#be185d}.review:nth-child(3) .avatar{background:#e0e7ff;color:#4338ca}.review-top strong{display:block;font-size:.85rem}.review-top small{display:block;font-size:.7rem;color:var(--muted)}.stars{color:#f59e0b;font-size:.78rem;letter-spacing:.1em;margin-bottom:.7rem}.review p{font-size:.84rem;color:var(--muted);font-style:italic}.review-disclaimer{text-align:center;color:var(--muted);font-size:.72rem;margin-top:1.2rem}
+.contact-wrap{padding:4rem 0}.contact{position:relative;overflow:hidden;background:var(--navy);color:white;text-align:center;padding:3.5rem 2rem;border-radius:30px;box-shadow:0 25px 55px #10182725}.contact h2{font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.2;position:relative;z-index:1}.contact p{color:#bdc8d7;max-width:620px;margin:1rem auto 0;position:relative;z-index:1}.contact-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:.8rem;margin-top:1.7rem;position:relative;z-index:1}.btn-wa{background:#22c55e}.btn-mail{background:#ea4335}.contact-hint{font-size:.7rem!important;color:#94a3b8!important;margin-top:1rem!important}
+footer{background:#090f1b;color:#94a3b8;padding:2.5rem 0 1.2rem}.footer-top{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}.footer-brand{color:white;font-size:1.2rem;font-weight:800}.footer-brand span{color:var(--green)}.footer-links{display:flex;gap:1rem;flex-wrap:wrap;font-size:.78rem}.footer-links a:hover{color:var(--mint)}.socials{display:flex;gap:.7rem}.socials a{width:37px;height:37px;border:1px solid #ffffff20;border-radius:12px;display:grid;place-items:center;transition:all .2s}.socials a:hover{background:var(--green);color:var(--navy);transform:translateY(-3px)}.copyright{text-align:center;border-top:1px solid #ffffff12;padding-top:1rem;margin-top:1.7rem;font-size:.72rem}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}.delay-1{transition-delay:.12s}.delay-2{transition-delay:.22s}.delay-3{transition-delay:.32s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes grow{from{transform:scaleY(.1);opacity:.3}to{transform:scaleY(1);opacity:1}}
+@media(max-width:980px){.nav-links{gap:.8rem}.nav-links a{font-size:.77rem}.hero-grid{gap:2rem}.cards-grid{grid-template-columns:repeat(2,1fr)}.view-card{grid-template-columns:1fr 1fr;gap:1.2rem}.float-chip{right:-8px}.download-panel{padding:2.2rem}}
+@media(max-width:760px){.tech-grid{grid-template-columns:1fr}.nav-inner{min-height:70px}.menu-btn{display:block}.nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;padding:1rem 5% 1.3rem;border-bottom:1px solid var(--rose);box-shadow:0 20px 25px #10182712;flex-direction:column;align-items:stretch;gap:.15rem}.nav-links.open{display:flex}.nav-links a:not(.btn){padding:.7rem .3rem}.nav-links .btn{margin-top:.5rem}.hero{padding:3.5rem 0}.hero-grid,.mv-grid,.about-inner,.view-card,.download-panel{grid-template-columns:1fr}.hero-grid{gap:2.5rem}.hero h1{font-size:clamp(2.45rem,10vw,3.6rem)}.dashboard{max-width:520px;width:100%;margin:auto}.float-chip{right:0;bottom:20px}.mv-section,.features-section,.views-section,.benefits{padding:3.7rem 0}.about-strip{padding:3rem 0}.view-card{padding:1.25rem}.view-copy h3{font-size:1.2rem}.preview{padding:.9rem}.preview-stats{grid-template-columns:1fr 1fr}.preview-stat:last-child{display:none}.benefit-grid{grid-template-columns:repeat(2,1fr)}.download-panel{padding:2rem}.download-art{min-height:130px}.download-art .app-icon{width:100px;height:100px;font-size:2.8rem}.review-grid{grid-template-columns:1fr}.contact{padding:2.7rem 1.3rem}.footer-top{flex-direction:column;text-align:center}.footer-links{justify-content:center}}
+@media(max-width:430px){.container{width:91%}.cards-grid,.benefit-grid{grid-template-columns:1fr}.hero-actions .btn{width:100%}.stat-grid{gap:.45rem}.stat{padding:.75rem}.stat strong{font-size:1.1rem}.preview table{font-size:.58rem}.products th,.products td{padding:.55rem .2rem}.contact-buttons .btn{width:100%}.hero-points{gap:.65rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* Paleta principal: carbón, verde bosque, terracota y gris claro. */
+.navbar{background:#f4f5f3eF;border-bottom-color:#25473b26}
+.logo-mark{background:linear-gradient(145deg,#383838,#25473b);color:#dfdfdf}
+.brand span{color:#ca4a2f}
+.nav-links a:not(.btn):hover,.footer-links a:hover{color:#ca4a2f}
+.btn{background:linear-gradient(120deg,#ca4a2f,#a93620);box-shadow:0 10px 28px #ca4a2f38}
+.btn:hover{box-shadow:0 12px 30px #ca4a2f50}
+.btn-outline{background:#fff;color:#383838;border-color:#dfe4df}
+.menu-btn{background:linear-gradient(145deg,#383838,#25473b)}
+.hero{background:radial-gradient(ellipse at 92% 80%,#ca4a2f25,transparent 48%),linear-gradient(120deg,#f4f5f3 0%,#fff 52%,#f8e8e1 100%)}
+.hero:before,.contact:before{background:#ca4a2f20}
+.eyebrow{background:#f5eeeb;border-color:#e7c6bd;color:#9f3825}
+.gradient-text{background-image:linear-gradient(110deg,#25473b,#ca4a2f);background-clip:text;-webkit-background-clip:text;color:transparent}
+.hero-points i,.kicker{color:#25473b}
+.dashboard,.preview{background:linear-gradient(145deg,#383838,#25473b)}
+.bars span,.mini-chart i{background:linear-gradient(0deg,#ca4a2f,#dfdfdf)}
+.float-chip i{color:#ca4a2f}
+.mv-card{border-color:#e7c6bd}
+.mv-card:before{background:linear-gradient(90deg,#25473b,#ca4a2f)}
+.mv-icon,.tech-icon,.card-icon{background:#edf2ee;color:#25473b}
+.mv-card:nth-child(2) .mv-icon,.feature-card:nth-child(even) .card-icon{background:#f5eeeb;color:#ca4a2f}
+.tech-strip{background:#fff;border-color:#dfe4df}
+.tech-item{background:linear-gradient(135deg,#fff,#f4f5f3)}
+.tech-item:hover{border-color:#9bb7a7}
+.about-strip,.benefits{background:linear-gradient(135deg,#383838,#25473b)}
+.about-inner h2 span,.download-panel h2 span{color:#dfdfdf}
+.num-tag{color:#a93620;background:#f5eeeb;border-color:#e7c6bd}
+.feature-card:hover{border-color:#9bb7a7;box-shadow:0 20px 40px #25473b20}
+.tag{background:#edf2ee;color:#25473b}
+.views-section{background:#ecefeb}
+.view-number{background:linear-gradient(135deg,#25473b,#383838);box-shadow:0 8px 22px #25473b30}
+.view-copy li i{color:#25473b}
+.login-form{background:#383838;border-color:#56665d}
+.fake-input{background:#25473b;border-color:#56665d}
+.fake-button{background:linear-gradient(120deg,#ca4a2f,#a93620);color:#fff}
+.status{background:#25473b;color:#dfdfdf}
+.status.warn{background:#f2e6d2;color:#805b20}
+.status.low{background:#f5eeeb;color:#a93620}
+.benefit:hover{border-color:#ca4a2f80}
+.download-panel{background:radial-gradient(circle at 90% 15%,#ca4a2f45,transparent 30%),linear-gradient(120deg,#383838,#25473b)}
+.download-panel:after{background:#ca4a2f35}
+.download-art .app-icon{background:linear-gradient(135deg,#25473b,#ca4a2f);color:#dfdfdf;box-shadow:0 0 55px #ca4a2f40}
+.reviews{background:linear-gradient(135deg,#fff,#f5eeeb)}
+.review{border-color:#e7c6bd}
+.avatar{background:#edf2ee;color:#25473b}
+.review:nth-child(2) .avatar,.review:nth-child(3) .avatar{background:#f5eeeb;color:#a93620}
+.contact{background:radial-gradient(circle at 90% 10%,#ca4a2f35,transparent 34%),linear-gradient(135deg,#383838,#25473b)}
+.btn-wa{background:linear-gradient(120deg,#25473b,#35654f)}
+.btn-mail{background:linear-gradient(120deg,#ca4a2f,#a93620)}
+footer{background:#292d2b}
+.footer-brand span{color:#ca4a2f}
+.socials a:hover{background:#ca4a2f;color:#fff}
+@media(max-width:760px){.nav-links{background:#f4f5f3;border-color:#e7c6bd}}
+
+.anuncios{
+  position:relative;
+  width:min(1160px,90%);
+  height:320px;
+  margin:20px auto;
+  overflow:hidden;
+  border-radius:16px;
+  background:linear-gradient(135deg,#383838,#25473b);
+  box-shadow:0 18px 45px #25473b24;
+}
+.anuncios img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:inherit;
+  opacity:0;
+  transition:opacity .8s ease;
+}
+.anuncios img.active{
+  opacity:1;
+}
+@media(max-width:760px){
+  .anuncios{width:91%;height:220px}
+}
+@media(prefers-reduced-motion:reduce){
+  .anuncios img{transition:none}
+}
+</style>
+</head>
+<body>
+<header class="navbar">
+  <div class="container nav-inner">
+    <a class="logo" href="#inicio" aria-label="StockPOS, inicio">
+      <img src="https://uploads.onecompiler.io/44rr6xv3d/1792545949801/logo%20stock%C3%82%C2%B4ps.png" alt="Logo de StockPOS" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+      <span class="logo-mark" style="display:none"><i class="fa-solid fa-cubes-stacked"></i></span>
+      <span><span class="brand">Stock<span>POS</span></span><span class="slogan">Tu negocio en orden, tus ventas al instante.</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+      <a href="#mision-vision">Nosotros</a><a href="#funciones">Funciones</a><a href="#vistas">Vistas</a><a href="#comentarios">Opiniones</a><a href="#contacto">Contacto</a>
+      <a href="#descargar" class="btn"><i class="fa-solid fa-download"></i> Descargar</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+<div class="anuncios">
+  <img src="https://uploads.onecompiler.io/456xy997m/1792763377842/WhatsApp%20Image%202026-10-23%20at%207.49.11%20AM.jpeg" class="active" alt="Anuncio 1">
+  <img src="https://uploads.onecompiler.io/456xy997m/1792763643264/WhatsApp%20Image%202026-10-23%20at%207.53.47%20AM.jpeg" alt="Anuncio 2">
+  </div>
+</div>
+<main>
+<section class="mv-section" id="mision-vision">
+  <div class="container">
+    <div class="section-heading reveal"><div class="kicker">Lo que nos impulsa</div><h2>Una visión clara. <span class="gradient-text">Una misión que suma.</span></h2><p>En StockPOS creemos que administrar un negocio puede ser más sencillo, organizado y accesible.</p></div>
+    <div class="mv-grid">
+      <article class="mv-card reveal"><div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div><h3>Nuestra misión</h3><p>Proporcionar a pequeños y medianos comercios una herramienta tecnológica de punto de venta moderna, intuitiva y accesible que simplifique la administración de inventarios, optimice los cobros diarios y facilite la toma de decisiones.</p></article>
+      <article class="mv-card reveal delay-1"><div class="mv-icon"><i class="fa-solid fa-rocket"></i></div><h3>Nuestra visión</h3><p>Ser un sistema de gestión preferido por boutiques, comercios y negocios independientes, reconocido por combinar una experiencia visual cuidada, eficiencia operativa y una gestión responsable de la información.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="hero" id="inicio">
+ <div class="container hero-grid">
+  <div class="reveal">
+   <span class="eyebrow"><i class="fa-solid fa-sparkles"></i> Tecnología para hacer crecer tu negocio</span>
+   <h1>Tu negocio merece un punto de venta <span class="gradient-text">más inteligente</span> y con mucho  <span class="gradient-text">estilo.</span></h1>
+   <p class="hero-desc">Con StockPOS puedes organizar tus productos, agilizar tus ventas y consultar reportes desde una interfaz clara, moderna y fácil de usar.</p>
+   <div class="hero-actions"><a class="btn" href="#funciones">Explorar funciones <i class="fa-solid fa-arrow-right"></i></a><a class="btn btn-outline" href="#contacto"><i class="fa-regular fa-message"></i> Conócenos</a></div>
+   <div class="hero-points"><span><i class="fa-solid fa-circle-check"></i> Control de inventario</span><span><i class="fa-solid fa-circle-check"></i> Reportes visuales</span><span><i class="fa-solid fa-circle-check"></i> Gestión sencilla</span><span><i class="fa-solid fa-circle-check"></i> Diseño adaptable</span></div>
+  </div>
+  <!-- Panel visual de demostración: las cifras mostradas son datos ilustrativos. -->
+   <div class="dashboard reveal delay-1" aria-label="Vista ilustrativa del panel de StockPOS">
+   <div class="mock-head"><div class="dots"><i></i><i></i><i></i></div><span>StockPOS · Panel de control</span><span><i class="fa-solid fa-ellipsis"></i></span></div>
+   <div class="dash-title"><strong><i class="fa-solid fa-chart-pie" style="color:var(--mint);margin-right:.4rem"></i> Resumen del negocio</strong><span class="live">● DEMO</span></div>
+   <div class="stat-grid"><div class="stat"><small>Ventas del día</small><strong>$5,420.50</strong><em><i class="fa-solid fa-arrow-trend-up"></i> Resumen ilustrativo</em></div><div class="stat"><small>Productos registrados</small><strong>248</strong><em><i class="fa-solid fa-box"></i> Inventario demo</em></div></div>
+   <div class="chart"><div class="chart-top"><span>Actividad de ventas</span><span>Últimos 7 días</span></div><div class="bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+   <div class="float-chip"><i class="fa-solid fa-check-circle"></i> Todo bajo control</div>
+  </div>
+ </div>
+</section>
+
+
+<section class="tech-strip" aria-label="Enfoque de StockPOS">
+ <div class="container tech-grid">
+  <article class="tech-item reveal"><span class="tech-icon"><i class="fa-solid fa-shield-halved"></i></span><div><strong>Acceso organizado</strong><p>Una experiencia pensada para separar y ordenar las tareas del negocio.</p></div></article>
+  <article class="tech-item reveal delay-1"><span class="tech-icon"><i class="fa-solid fa-chart-line"></i></span><div><strong>Información visual</strong><p>Indicadores y resúmenes ilustrativos para entender mejor la actividad.</p></div></article>
+  <article class="tech-item reveal delay-2"><span class="tech-icon"><i class="fa-solid fa-laptop-mobile"></i></span><div><strong>Diseño adaptable</strong><p>Una página preparada para verse cómodamente en computadora, tablet y celular.</p></div></article>
+ </div>
+</section>
+
+<section class="about-strip"><div class="container about-inner reveal"><div><div class="kicker" style="color:var(--mint)">Conoce StockPOS</div><h2>Menos enredos en tu día.<br><span>Más tiempo para crecer.</span></h2></div><div><p>StockPOS está pensado para centralizar tareas importantes del negocio en un mismo lugar: desde registrar productos hasta revisar cómo van las ventas.</p><div class="about-pills"><span><i class="fa-solid fa-bag-shopping"></i> Comercios</span><span><i class="fa-solid fa-store"></i> Emprendimientos</span><span><i class="fa-solid fa-laptop"></i> Interfaz moderna</span></div></div></div></section>
+
+<section class="features-section" id="funciones"><div class="container">
+ <div class="section-heading reveal"><div class="kicker">Herramientas esenciales</div><h2>Todo lo que tu negocio necesita</h2><p>Funciones organizadas para que el trabajo diario sea más práctico.</p></div>
+ <div class="cards-grid">
+  <article class="feature-card reveal"><span class="num-tag">01</span><div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></div><h3>Punto de venta</h3><p>Registra compras, administra el carrito y consulta el total de cada operación con claridad.</p><span class="tag">RÁPIDO · PRÁCTICO</span></article>
+  <article class="feature-card reveal delay-1"><span class="num-tag">02</span><div class="card-icon"><i class="fa-solid fa-boxes-stacked"></i></div><h3>Inventario y productos</h3><p>Organiza por categorías, actualiza precios y detecta productos que necesitan reabastecimiento.</p><span class="tag">ORDENA · SUPERVISA</span></article>
+  <article class="feature-card reveal delay-2"><span class="num-tag">03</span><div class="card-icon"><i class="fa-solid fa-chart-column"></i></div><h3>Reportes y dashboard</h3><p>Consulta resúmenes de ventas y observa tendencias para apoyar tus decisiones.</p><span class="tag">ANALIZA · MEJORA</span></article>
+  <article class="feature-card reveal delay-3"><span class="num-tag">04</span><div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div><h3>Acceso y seguridad</h3><p>Diseñado para organizar el acceso de usuarios y proteger la información de tu negocio.</p><span class="tag">ACCESO · CONTROL</span></article>
+ </div>
+</div></section>
+
+<section class="views-section" id="vistas"><div class="container">
+ <div class="section-heading reveal"><div class="kicker">Así se vería</div><h2>Cuatro vistas principales, <span class="gradient-text">todo más organizado</span></h2><p>Prototipos ilustrativos de las pantallas principales de StockPOS.</p></div>
+ <div class="view-list">
+  <article class="view-card reveal"><div class="view-copy"><div class="view-title"><span class="view-number">1</span><h3>Inicio de sesión</h3></div><p>Un acceso claro para que cada usuario entre a su cuenta.</p><ul><li><i class="fa-solid fa-check-circle"></i> Acceso con correo y contraseña</li><li><i class="fa-solid fa-check-circle"></i> Recuperación de contraseña</li><li><i class="fa-solid fa-check-circle"></i> Interfaz sencilla y accesible</li><li><i class="fa-solid fa-check-circle"></i> Diseño preparado para distintos dispositivos</li></ul></div><div class="preview"><div class="preview-head"><strong><i class="fa-solid fa-shield-halved" style="color:var(--mint)"></i> Acceso StockPOS</strong><span>Vista de ejemplo</span></div><div class="login-form"><div class="mini-logo"><i class="fa-solid fa-cubes-stacked"></i> StockPOS</div><p style="font-size:.75rem;color:#cbd5e1">Bienvenido de nuevo</p><div class="fake-input"><i class="fa-regular fa-envelope"></i> &nbsp; Correo electrónico</div><div class="fake-input"><i class="fa-solid fa-lock"></i> &nbsp; Contraseña</div><div class="fake-button">Iniciar sesión</div><p style="font-size:.65rem;color:#94a3b8;margin-top:.7rem">¿Olvidaste tu contraseña?</p></div></div></article>
+
+  <article class="view-card reveal"><div class="view-copy"><div class="view-title"><span class="view-number">2</span><h3>Punto de venta</h3></div><p>Una pantalla pensada para agilizar el cobro y mantener los importes visibles.</p><ul><li><i class="fa-solid fa-check-circle"></i> Productos y precios a la vista</li><li><i class="fa-solid fa-check-circle"></i> Resumen de compra</li><li><i class="fa-solid fa-check-circle"></i> Total claro antes de cobrar</li></ul></div><div class="preview"><div class="preview-head"><strong><i class="fa-solid fa-cart-shopping" style="color:var(--mint)"></i> Punto de venta</strong><span>Caja · Vista demo</span></div><table class="products"><thead><tr><th>Producto</th><th>Cant.</th><th>Precio</th></tr></thead><tbody><tr><td>Refresco 600 ml</td><td>2</td><td>$40.00</td></tr><tr><td>Botanas</td><td>1</td><td>$18.00</td></tr><tr><td>Leche 1 L</td><td>1</td><td>$26.00</td></tr></tbody></table><div style="display:flex;justify-content:space-between;padding:1rem .3rem .3rem;font-size:.8rem"><span style="color:#cbd5e1">Total de ejemplo</span><strong style="color:var(--mint);font-size:1.2rem">$84.00</strong></div><div class="fake-button" style="text-align:center">Continuar con el cobro</div></div></article>
+
+  <article class="view-card reveal"><div class="view-copy"><div class="view-title"><span class="view-number">3</span><h3>Inventario y productos</h3></div><p>Visualiza el estado de los artículos y encuentra rápidamente lo que necesitas.</p><ul><li><i class="fa-solid fa-check-circle"></i> Organización por categorías</li><li><i class="fa-solid fa-check-circle"></i> Indicadores de existencias</li><li><i class="fa-solid fa-check-circle"></i> Gestión de productos</li></ul></div><div class="preview"><div class="preview-head"><strong><i class="fa-solid fa-boxes-stacked" style="color:var(--mint)"></i> Inventario</strong><span>Datos de ejemplo</span></div><table class="products"><thead><tr><th>Producto</th><th>Stock</th><th>Estado</th></tr></thead><tbody><tr><td>Refresco 600 ml</td><td>85</td><td><span class="status">Disponible</span></td></tr><tr><td>Botanas</td><td>12</td><td><span class="status warn">Stock bajo</span></td></tr><tr><td>Leche 1 L</td><td>4</td><td><span class="status low">Por revisar</span></td></tr><tr><td>Aceite 850 ml</td><td>28</td><td><span class="status">Disponible</span></td></tr></tbody></table></div></article>
+
+  <article class="view-card reveal"><div class="view-copy"><div class="view-title"><span class="view-number">4</span><h3>Reportes y dashboard</h3></div><p>Un resumen visual de la actividad para consultar el rendimiento del negocio.</p><ul><li><i class="fa-solid fa-check-circle"></i> Resúmenes por periodo</li><li><i class="fa-solid fa-check-circle"></i> Gráfica de actividad</li><li><i class="fa-solid fa-check-circle"></i> Información útil para decidir</li></ul></div><div class="preview"><div class="preview-head"><strong><i class="fa-solid fa-chart-line" style="color:var(--mint)"></i> Resumen de ventas</strong><span>Demo ilustrativa</span></div><div class="preview-stats"><div class="preview-stat"><small>Hoy</small><strong>$5,420</strong></div><div class="preview-stat"><small>Esta semana</small><strong>$28,450</strong></div><div class="preview-stat"><small>Este mes</small><strong>$112,300</strong></div></div><div class="chart" style="margin-top:.7rem"><div class="chart-top"><span>Actividad semanal</span><span>7 días</span></div><div class="mini-chart"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></article>
+ </div>
+</div></section>
+
+<section class="benefits" id="beneficios"><div class="container">
+ <div class="section-heading reveal"><div class="kicker" style="color:var(--mint)">¿Por qué StockPOS?</div><h2>Hecho para acompañar el crecimiento de tu negocio</h2><p>Una experiencia pensada para combinar claridad, organización y facilidad de uso.</p></div>
+ <div class="benefit-grid">
+  <article class="benefit reveal"><i class="fa-solid fa-wand-magic-sparkles"></i><h3>Fácil de usar</h3><p>Una interfaz ordenada para localizar funciones sin complicaciones.</p></article>
+  <article class="benefit reveal delay-1"><i class="fa-solid fa-box-open"></i><h3>Inventario organizado</h3><p>Consulta existencias y mantén tus productos mejor organizados.</p></article>
+  <article class="benefit reveal delay-2"><i class="fa-solid fa-chart-simple"></i><h3>Información visual</h3><p>Comprende la actividad mediante indicadores y gráficas de ejemplo.</p></article>
+  <article class="benefit reveal"><i class="fa-solid fa-users"></i><h3>Gestión de usuarios</h3><p>Una estructura pensada para diferenciar perfiles y responsabilidades.</p></article>
+  <article class="benefit reveal delay-1"><i class="fa-solid fa-cloud"></i><h3>Preparado para evolucionar</h3><p>Un proyecto que puede ampliarse con servicios y herramientas adicionales.</p></article>
+  <article class="benefit reveal delay-2"><i class="fa-solid fa-heart"></i><h3>Enfoque en el comercio</h3><p>Funciones centradas en las necesidades cotidianas de los negocios.</p></article>
+ </div>
+</div></section>
+
+<section class="download-section" id="descargar"><div class="container"><div class="download-panel reveal">
+ <div><div class="kicker" style="color:var(--mint)">Da el siguiente paso</div><h2>Tu negocio, más organizado.<br><span>Tu siguiente etapa comienza aquí.</span></h2><p>¿Quieres conocer StockPOS? Ponte en contacto con el equipo para obtener información sobre la disponibilidad de la aplicación y una posible demostración.</p><div class="download-actions"><a class="btn" href="#contacto"><i class="fa-solid fa-paper-plane"></i> Solicitar información</a><a class="btn btn-outline" href="#vistas"><i class="fa-regular fa-eye"></i> Ver las vistas</a></div><p class="download-note">Enlace :3</p></div>
+ <div class="download-art"><div class="app-icon"><i class="fa-solid fa-cubes-stacked"></i></div></div>
+</div></div></section>
+
+<section class="reviews" id="comentarios"><div class="container">
+ <div class="section-heading reveal"><div class="kicker">Comentarios</div><h2>Una experiencia hecha para el día a día</h2><p>Espacio para compartir opiniones y experiencias de uso de StockPOS.</p></div>
+ <div class="review-grid">
+  <article class="review reveal"><div class="review-top"><div class="avatar"><img src="https://uploads.onecompiler.io/44rr6xv3d/1792545220082/user1.jpg" alt="Avatar de emprendimiento local"></div><div><strong>Emprendimiento local</strong><small>Opinión de ejemplo</small></div></div><div class="stars">★★★★★</div><p>“Una herramienta así puede ayudarme a llevar un registro más claro de mis productos y ventas.”</p></article>
+  <article class="review reveal delay-1"><div class="review-top"><div class="avatar"><img src="https://uploads.onecompiler.io/44rr6xv3d/1792545223065/user2.jpg" alt="Avatar de comercio independiente"></div><div><strong>Comercio independiente</strong><small>Opinión de ejemplo</small></div></div><div class="stars">★★★★★</div><p>“Me gusta la idea de tener las funciones principales organizadas en un mismo lugar.”</p></article>
+  <article class="review reveal delay-2"><div class="review-top"><div class="avatar"><img src="https://uploads.onecompiler.io/44rr6xv3d/1792545225614/user3.jpg" alt="Avatar de pequeño negocio"></div><div><strong>Pequeño negocio</strong><small>Opinión de ejemplo</small></div></div><div class="stars">★★★★★</div><p>“Los reportes visuales y el control de inventario serían útiles para revisar cómo va el negocio.”</p></article>
+</div></section>
+
+<section class="contact-wrap" id="contacto"><div class="container"><div class="contact reveal">
+ <div class="kicker" style="color:var(--mint)">Estamos para escucharte</div><h2>¿Tienes dudas sobre StockPOS?</h2><p>Contáctanos para solicitar información, compartir sugerencias o conocer más sobre el proyecto.</p>
+ <div class="contact-buttons">
+  <!-- Sustituye el número de ejemplo por el número oficial en formato internacional, sin + ni espacios. -->
+  <a class="btn btn-wa" href="https://wa.link/ezqvn2" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Contactar por WhatsApp</a>
+  <!-- Sustituye el correo de ejemplo por el correo oficial. -->
+  <a class="btn btn-mail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=biancanahomy2107@gmail.com&amp;su=Informaci%C3%B3n%20sobre%20StockPOS" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-envelope"></i> Enviar un correo</a>
+
+</main>
+
+<footer><div class="container">
+ <div class="footer-top"><a href="#inicio"><div class="footer-brand">Stock<span>POS</span></div><div style="font-size:.72rem">Tu negocio en orden, tus ventas al instante.</div></a>
+  <nav class="footer-links" aria-label="Enlaces del pie de página"><a href="#mision-vision">Nosotros</a><a href="#funciones">Funciones</a><a href="#vistas">Vistas</a><a href="#descargar">Descargar</a><a href="#comentarios">Opiniones</a><a href="#contacto">Contacto</a></nav>
+  <div class="socials"><a href="#contacto" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a><a href="#contacto" aria-label="Correo electrónico"><i class="fa-regular fa-envelope"></i></a><a href="#inicio" aria-label="Volver al inicio"><i class="fa-solid fa-arrow-up"></i></a></div>
+ </div><div class="copyright">©️ 2026 StockPOS — Proyecto de Desarrollo de Software. Papantla, Veracruz. Todos los derechos reservados.</div>
+</div></footer>
+<script>
+const menuBtn=document.getElementById('menuBtn');
+const navLinks=document.getElementById('navLinks');
+menuBtn.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.innerHTML=open?'<i class="fa-solid fa-xmark"></i>':'<i class="fa-solid fa-bars"></i>';});
+navLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{navLinks.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.innerHTML='<i class="fa-solid fa-bars"></i>';}));
+const revealObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target);}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+const anuncios=[...document.querySelectorAll('.anuncios img')].filter(img=>img.getAttribute('src')?.trim());
+let anuncioActual=0;
+if(anuncios.length>1){
+  setInterval(()=>{
+    anuncios[anuncioActual].classList.remove('active');
+    anuncioActual=(anuncioActual+1)%anuncios.length;
+    anuncios[anuncioActual].classList.add('active');
+  },5000);
+}
+</script>
+</body>
+</html>

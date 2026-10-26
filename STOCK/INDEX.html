@@ -1,0 +1,3117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A192F">
+<title>StockPOS | Software de Punto de Venta &amp; Gestión Comercial B2B</title>
+<meta name="description" content="StockPOS: Solución tecnológica empresarial de punto de venta, inventarios multisede y reportes en la nube para pequeños, medianos y grandes comercios minoristas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root {
+  /* PALETA CORPORATIVA Y EMPRESARIAL B2B */
+  --navy-deep: #0A192F;        /* Azul Marino Profundo (Hero, Navbar, Footer) */
+  --navy: #0F172A;             /* Azul Marino Corporativo complementario */
+  --navy-dark: #070F1E;        /* Base ultra oscura */
+  --navy-surface: #1E293B;     /* Superficies y tarjetas oscuras */
+  --navy-surface-light: #334155;
+  
+  --emerald: #10B981;          /* Verde Esmeralda Corporativo */
+  --emerald-dark: #059669;     /* Verde Esmeralda de contraste */
+  --emerald-light: #34D399;    /* Verde Esmeralda brillante */
+  --emerald-soft: #ECFDF5;     /* Fondo suave verde */
+  --emerald-border: #A7F3D0;   /* Borde verde corporativo */
+  
+  --bg-light: #F8FAFC;         /* Fondo General Claro */
+  --bg-white: #FFFFFF;         /* Blanco puro */
+  
+  --text-dark: #1E293B;        /* Gris oscuro para títulos y texto principal */
+  --text-body: #334155;        /* Gris oscuro balanceado para lectura */
+  --text-muted: #64748B;       /* Gris neutro para texto secundario */
+  --text-light: #94A3B8;       /* Gris claro sobre fondos oscuros */
+  --text-white: #FFFFFF;       /* Blanco puro */
+  
+  --border-light: #E2E8F0;     /* Bordes en fondos claros */
+  --border-subtle: #CBD5E1;    /* Bordes secundarios */
+  --border-dark: #334155;      /* Bordes en paneles oscuros */
+  --border-navy: rgba(255, 255, 255, 0.08); /* Bordes en azul marino */
+  
+  --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.05);
+  --shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 40px -5px rgba(15, 23, 42, 0.12);
+  --shadow-hero: 0 25px 60px -10px rgba(10, 25, 47, 0.45);
+  --shadow-float: 0 20px 35px -5px rgba(10, 25, 47, 0.22), 0 0 0 1px rgba(226, 232, 240, 0.9);
+  --glow-emerald: 0 0 30px rgba(16, 185, 129, 0.35);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-body);
+  background: var(--bg-light);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, textarea { font: inherit; }
+
+.container {
+  width: min(1180px, 92%);
+  margin: auto;
+}
+
+section {
+  scroll-margin-top: 84px;
+}
+
+/* =========================================================
+   BARRA SUPERIOR (NAVBAR) - AZUL MARINO PROFUNDO (#0A192F)
+   ========================================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 25, 47, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-navy);
+  transition: background-color 0.3s ease;
+}
+
+.nav-inner {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+.logo img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.logo-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--navy-surface);
+  color: var(--emerald);
+  font-size: 1.25rem;
+  border: 1px solid var(--border-dark);
+}
+
+.brand {
+  font-size: 1.38rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-white);
+  line-height: 1.1;
+}
+
+.brand span { color: var(--emerald); }
+
+.slogan {
+  font-size: 0.68rem;
+  color: var(--text-light);
+  display: block;
+  margin-top: 0.2rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.nav-links a:not(.btn) {
+  color: #E2E8F0;
+  transition: color 0.2s ease;
+  position: relative;
+  padding: 0.3rem 0;
+}
+
+.nav-links a:not(.btn):hover {
+  color: var(--emerald);
+}
+
+.nav-links a:not(.btn):after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--emerald);
+  transition: width 0.25s ease;
+  border-radius: 2px;
+}
+
+.nav-links a:not(.btn):hover:after { width: 100%; }
+
+.menu-btn {
+  display: none;
+  background: var(--navy-surface);
+  color: #FFFFFF;
+  border: 1px solid var(--border-dark);
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* =========================================================
+   BOTONES CORPORATIVOS
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  border: 0;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-emerald,
+.btn-primary-emerald {
+  background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+  color: #FFFFFF;
+  box-shadow: 0 10px 24px -4px rgba(16, 185, 129, 0.4);
+}
+
+.btn-emerald:hover,
+.btn-primary-emerald:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -4px rgba(16, 185, 129, 0.55);
+}
+
+.btn-video,
+.btn-secondary-video {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.btn-video:hover,
+.btn-secondary-video:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: var(--emerald);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.btn-video-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--emerald);
+  color: var(--navy-deep);
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  padding-left: 2px;
+  transition: transform 0.2s ease;
+}
+
+.btn-video:hover .btn-video-icon {
+  transform: scale(1.1);
+  background: #FFFFFF;
+  color: var(--emerald-dark);
+}
+
+.btn-outline-navy {
+  background: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline-navy:hover {
+  border-color: var(--emerald);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+/* =========================================================
+   1. PORTADA PRINCIPAL CORPORATIVA (HERO SECTION)
+   Con video multimedia de fondo y capa semitransparente (#0A192F)
+   ========================================================= */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 6.8rem 0 6rem;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: var(--navy-deep);
+  color: #FFFFFF;
+  border-bottom: 1px solid var(--border-navy);
+}
+
+.hero-video-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(10, 25, 47, 0.82) 0%, rgba(10, 25, 47, 0.72) 50%, rgba(10, 25, 47, 0.94) 100%),
+              radial-gradient(circle at 50% 32%, rgba(16, 185, 129, 0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: var(--emerald-light);
+  border-radius: 999px;
+  padding: 0.45rem 1.15rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 10px var(--emerald);
+  animation: pulseEmerald 2s infinite;
+}
+
+.hero-title {
+  font-size: clamp(2.55rem, 5vw, 4.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+  color: #FFFFFF;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.highlight-emerald {
+  color: var(--emerald);
+  display: inline;
+}
+
+.hero-desc {
+  font-size: 1.12rem;
+  line-height: 1.75;
+  color: var(--text-light);
+  max-width: 780px;
+  margin: 0 auto 2.2rem;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 2.8rem;
+}
+
+/* Barra de Métricas B2B de Confianza */
+.hero-b2b-kpis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.2rem;
+  padding: 1.2rem 2.4rem;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  flex-wrap: wrap;
+}
+
+.b2b-kpi-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.b2b-val {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--emerald-light);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.b2b-lbl {
+  font-size: 0.73rem;
+  color: #CBD5E1;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.b2b-kpi-sep {
+  width: 1px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* =========================================================
+   2. SECCIÓN DE DEMOSTRACIÓN TÉCNICA Y TERMINAL (REUBICADA)
+   "Nuestra Tecnología en Acción" - Justo debajo de la portada
+   ========================================================= */
+.tech-action-section {
+  padding: 5.5rem 0 5rem;
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.section-heading {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3rem;
+}
+
+.kicker {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--emerald-dark);
+  margin-bottom: 0.6rem;
+}
+
+.section-heading h2 {
+  font-size: clamp(2rem, 3.8vw, 2.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  color: var(--text-dark);
+  font-weight: 800;
+}
+
+.section-heading p {
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  font-size: 1.04rem;
+}
+
+.tech-action-grid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.tech-capabilities {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.capability-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.35rem 1.5rem;
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.capability-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--emerald-border);
+  box-shadow: var(--shadow);
+}
+
+.cap-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  border: 1px solid var(--emerald-border);
+}
+
+.capability-card h3 {
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  font-weight: 800;
+  margin-bottom: 0.35rem;
+}
+
+.capability-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.tech-cta-box {
+  margin-top: 0.8rem;
+}
+
+.tech-mockup-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Gráfico Principal: Mockup del Sistema StockPOS */
+.pos-mockup {
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 22px;
+  box-shadow: var(--shadow-hero);
+  overflow: hidden;
+  position: relative;
+  color: #FFFFFF;
+}
+
+.mock-topbar {
+  background: rgba(10, 25, 47, 0.7);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mock-window-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.mock-window-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+}
+
+.mock-window-dots span:nth-child(1) { background: #EF4444; }
+.mock-window-dots span:nth-child(2) { background: #F59E0B; }
+.mock-window-dots span:nth-child(3) { background: var(--emerald); }
+
+.mock-system-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #CBD5E1;
+}
+
+.mock-system-title img {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.mock-system-title strong { color: var(--emerald); }
+
+.mock-status-pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--emerald-light);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.online-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald);
+  animation: pulseEmerald 1.8s infinite;
+}
+
+.mock-body { padding: 1.35rem; }
+
+.mock-kpis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-bottom: 1.1rem;
+}
+
+.mock-kpi-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+}
+
+.kpi-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.kpi-value {
+  display: block;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0.25rem 0 0.1rem;
+  letter-spacing: -0.02em;
+}
+
+.kpi-change {
+  font-size: 0.68rem;
+  color: var(--emerald-light);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.mock-pos-terminal {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  color: #94A3B8;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 0.6rem;
+}
+
+.terminal-header strong { color: #FFFFFF; }
+
+.cart-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.74rem;
+  color: #E2E8F0;
+  padding: 0.35rem 0;
+}
+
+.cart-item-row i {
+  color: var(--emerald);
+  margin-right: 0.4rem;
+}
+
+.cart-item-price {
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.terminal-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.65rem;
+  margin-top: 0.45rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.total-txt {
+  font-size: 0.75rem;
+  color: #94A3B8;
+}
+
+.total-amt {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--emerald-light);
+}
+
+.btn-mock-charge {
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.48rem 0.85rem;
+  font-size: 0.74rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.mock-sales-chart {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 0.85rem;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--text-light);
+  margin-bottom: 0.6rem;
+}
+
+.chart-bars-wrap {
+  height: 85px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 0.4rem 0.2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.chart-bars-wrap span {
+  flex: 1;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(0deg, var(--emerald-dark), var(--emerald-light));
+  animation: growBar 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: bottom;
+}
+
+.chart-bars-wrap span:nth-child(1) { height: 42%; }
+.chart-bars-wrap span:nth-child(2) { height: 68%; }
+.chart-bars-wrap span:nth-child(3) { height: 50%; }
+.chart-bars-wrap span:nth-child(4) { height: 82%; }
+.chart-bars-wrap span:nth-child(5) { height: 95%; }
+.chart-bars-wrap span:nth-child(6) { height: 65%; }
+.chart-bars-wrap span:nth-child(7) { height: 100%; box-shadow: 0 0 12px rgba(16, 185, 129, 0.6); }
+
+/* Tarjetas Flotantes de Métricas */
+.floating-metric-card {
+  position: absolute;
+  background: #FFFFFF;
+  border-radius: 18px;
+  padding: 0.95rem 1.15rem;
+  box-shadow: var(--shadow-float);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+.floating-metric-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.metric-card-top {
+  top: -24px;
+  right: -24px;
+  animation: floatCard1 5.5s ease-in-out infinite;
+}
+
+.metric-card-bottom {
+  bottom: -22px;
+  left: -24px;
+  animation: floatCard2 6.5s ease-in-out infinite;
+}
+
+.metric-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  border: 1px solid var(--emerald-border);
+}
+
+.metric-data { display: flex; flex-direction: column; }
+
+.metric-num {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--emerald-dark);
+  letter-spacing: -0.03em;
+}
+
+.metric-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 0.1rem;
+}
+
+.metric-sub {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.1rem;
+}
+
+.metric-sub i { color: var(--emerald-dark); }
+
+.floating-chip-pill {
+  position: absolute;
+  bottom: 60px;
+  right: -20px;
+  background: #FFFFFF;
+  color: var(--text-dark);
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow-float);
+  font-size: 0.74rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
+  animation: floatCard1 7s ease-in-out infinite reverse;
+}
+
+.floating-chip-pill i { color: var(--emerald-dark); }
+
+/* =========================================================
+   ANUNCIOS / BANNER PROMOCIONAL
+   ========================================================= */
+.anuncios {
+  position: relative;
+  width: min(1180px, 92%);
+  height: 280px;
+  margin: 2.2rem auto 0;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--navy);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+}
+
+.anuncios img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.anuncios img.active { opacity: 1; }
+
+/* =========================================================
+   3. ENFOQUE INSTITUCIONAL Y EMPRESARIAL: NOSOTROS (MISIÓN Y VISIÓN)
+   ========================================================= */
+.mv-section {
+  padding: 5.5rem 0 4.5rem;
+  background: var(--bg-light);
+}
+
+.mv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+}
+
+.mv-card {
+  background: #FFFFFF;
+  padding: 2.4rem 2rem;
+  border: 1px solid var(--border-light);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.mv-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--emerald-border);
+}
+
+.mv-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--emerald), var(--emerald-dark));
+}
+
+.mv-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  font-size: 1.35rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--emerald-border);
+}
+
+.mv-card h3 {
+  font-size: 1.25rem;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+  font-weight: 800;
+}
+
+.mv-card p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   ENFOQUE TECNOLÓGICO (TECH STRIP)
+   ========================================================= */
+.tech-strip {
+  padding: 1.8rem 0;
+  background: var(--bg-white);
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  background: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.tech-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--emerald-border);
+  box-shadow: var(--shadow);
+}
+
+.tech-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  font-size: 1.2rem;
+  border: 1px solid var(--emerald-border);
+}
+
+.tech-item strong {
+  display: block;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.tech-item p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-top: 0.2rem;
+}
+
+/* =========================================================
+   ABOUT STRIP - FRANJA MARINO CORPORATIVO
+   ========================================================= */
+.about-strip {
+  background: var(--navy);
+  color: #FFFFFF;
+  padding: 3.8rem 0;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border-navy);
+  border-bottom: 1px solid var(--border-navy);
+}
+
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.about-inner h2 {
+  font-size: clamp(1.85rem, 3.2vw, 2.6rem);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.about-inner h2 span { color: var(--emerald-light); }
+
+.about-inner p {
+  color: var(--text-light);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.about-pills {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.4rem;
+}
+
+.about-pills span {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #E2E8F0;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.about-pills span i { color: var(--emerald-light); }
+
+/* =========================================================
+   FUNCIONES ESENCIALES
+   ========================================================= */
+.features-section {
+  padding: 5.5rem 0;
+  background: var(--bg-white);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+}
+
+.feature-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 1.9rem 1.45rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-7px);
+  border-color: var(--emerald-border);
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.12);
+}
+
+.num-tag {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--emerald-dark);
+  background: var(--emerald-soft);
+  border: 1px solid var(--emerald-border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+}
+
+.card-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  font-size: 1.45rem;
+  margin-bottom: 1.35rem;
+  border: 1px solid var(--emerald-border);
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  margin-bottom: 0.65rem;
+  font-weight: 800;
+}
+
+.feature-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  border: 1px solid var(--emerald-border);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+/* =========================================================
+   VISTAS DEL SISTEMA
+   ========================================================= */
+.views-section {
+  background: var(--bg-light);
+  padding: 5.5rem 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.view-list {
+  display: grid;
+  gap: 1.8rem;
+}
+
+.view-card {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: #FFFFFF;
+  padding: 2.2rem;
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.view-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.view-title {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.view-number {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+  display: grid;
+  place-items: center;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+}
+
+.view-copy h3 {
+  font-size: 1.38rem;
+  color: var(--text-dark);
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.view-copy p {
+  color: var(--text-muted);
+  font-size: 0.94rem;
+  margin: 0.8rem 0 1rem;
+  line-height: 1.6;
+}
+
+.view-copy ul {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  font-size: 0.86rem;
+  color: var(--text-body);
+}
+
+.view-copy li i {
+  color: var(--emerald-dark);
+  margin-right: 0.55rem;
+}
+
+.preview {
+  background: var(--navy);
+  color: #FFFFFF;
+  border-radius: 20px;
+  padding: 1.4rem;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow);
+}
+
+.preview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+.preview-head strong {
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.preview-head span {
+  color: var(--text-light);
+  font-size: 0.7rem;
+}
+
+.login-form {
+  max-width: 340px;
+  margin: 0.6rem auto;
+  padding: 1.35rem;
+  background: var(--navy-surface);
+  border: 1px solid var(--border-dark);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.mini-logo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.8rem;
+}
+
+.mini-logo span { color: var(--emerald); }
+
+.fake-input {
+  padding: 0.7rem 0.85rem;
+  background: var(--navy-deep);
+  border: 1px solid var(--border-dark);
+  color: var(--text-light);
+  border-radius: 8px;
+  text-align: left;
+  font-size: 0.75rem;
+  margin: 0.6rem 0;
+}
+
+.fake-button {
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+  color: #FFFFFF;
+  border-radius: 8px;
+  padding: 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-top: 0.7rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.products {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.74rem;
+}
+
+.products th {
+  text-align: left;
+  color: var(--text-light);
+  font-weight: 600;
+  padding: 0.65rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.products td {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #E2E8F0;
+}
+
+.status {
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.18);
+  color: var(--emerald-light);
+  font-size: 0.65rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status.warn {
+  background: rgba(245, 158, 11, 0.2);
+  color: #FCD34D;
+}
+
+.status.low {
+  background: rgba(239, 68, 68, 0.2);
+  color: #FCA5A5;
+}
+
+.preview-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+}
+
+.preview-stat {
+  padding: 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.preview-stat small {
+  font-size: 0.65rem;
+  color: var(--text-light);
+  display: block;
+}
+
+.preview-stat strong {
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.mini-chart {
+  height: 85px;
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  padding: 0.7rem 0.2rem 0;
+}
+
+.mini-chart i {
+  flex: 1;
+  display: block;
+  background: linear-gradient(0deg, var(--emerald-dark), var(--emerald-light));
+  border-radius: 5px 5px 0 0;
+  animation: growBar 1.3s ease both;
+}
+
+.mini-chart i:nth-child(1) { height: 35%; }
+.mini-chart i:nth-child(2) { height: 55%; }
+.mini-chart i:nth-child(3) { height: 43%; }
+.mini-chart i:nth-child(4) { height: 80%; }
+.mini-chart i:nth-child(5) { height: 65%; }
+.mini-chart i:nth-child(6) { height: 95%; }
+
+/* =========================================================
+   BENEFICIOS EMPRESARIALES
+   ========================================================= */
+.benefits {
+  padding: 5.5rem 0;
+  background: var(--navy-deep);
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border-navy);
+}
+
+.benefits .section-heading h2 { color: #FFFFFF; }
+.benefits .section-heading p { color: var(--text-light); }
+
+.benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.benefit {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  padding: 1.65rem;
+  transition: all 0.3s ease;
+}
+
+.benefit:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--emerald);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.benefit i {
+  font-size: 1.5rem;
+  color: var(--emerald);
+  margin-bottom: 0.95rem;
+  display: inline-block;
+}
+
+.benefit h3 {
+  font-size: 1.08rem;
+  margin-bottom: 0.45rem;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.benefit p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.55;
+}
+
+/* =========================================================
+   DESCARGA / SOLICITUD
+   ========================================================= */
+.download-section {
+  padding: 5.5rem 0;
+  background: var(--bg-white);
+}
+
+.download-panel {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
+  color: #FFFFFF;
+  border-radius: 28px;
+  padding: 3.5rem;
+  box-shadow: var(--shadow-hero);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.download-panel::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -80px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15);
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+.download-panel h2 {
+  font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+.download-panel h2 span { color: var(--emerald-light); }
+
+.download-panel p {
+  color: var(--text-light);
+  margin: 1.1rem 0 1.6rem;
+  max-width: 580px;
+  position: relative;
+  z-index: 1;
+  font-size: 1.02rem;
+}
+
+.download-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.download-art {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  min-height: 200px;
+}
+
+.download-art .app-icon {
+  width: 140px;
+  height: 140px;
+  border-radius: 32px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+  color: #FFFFFF;
+  font-size: 3.8rem;
+  box-shadow: 0 0 50px rgba(16, 185, 129, 0.45);
+  transform: rotate(-6deg);
+  animation: floatCard1 5s ease-in-out infinite;
+}
+
+.download-note {
+  font-size: 0.78rem !important;
+  color: #94A3B8 !important;
+  margin-top: 1.1rem !important;
+}
+
+/* =========================================================
+   TESTIMONIOS / OPINIONES EJECUTIVAS
+   ========================================================= */
+.reviews {
+  padding: 5.5rem 0;
+  background: var(--bg-light);
+  border-top: 1px solid var(--border-light);
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+
+.review {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 1.8rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.review:hover {
+  transform: translateY(-5px);
+  border-color: var(--emerald-border);
+}
+
+.review-top {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.95rem;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--emerald-soft);
+  color: var(--emerald-dark);
+  font-weight: 800;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--emerald-border);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.review-top strong {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--text-dark);
+}
+
+.review-top small {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.stars {
+  color: #F59E0B;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.8rem;
+}
+
+.review p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* =========================================================
+   CONTACTO
+   ========================================================= */
+.contact-wrap {
+  padding: 5rem 0;
+  background: var(--bg-white);
+}
+
+.contact {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
+  color: #FFFFFF;
+  text-align: center;
+  padding: 4rem 2rem;
+  border-radius: 28px;
+  box-shadow: var(--shadow-hero);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.12);
+  filter: blur(60px);
+  top: -100px;
+  right: -60px;
+  pointer-events: none;
+}
+
+.contact h2 {
+  font-size: clamp(2rem, 3.8vw, 2.7rem);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  position: relative;
+  z-index: 1;
+}
+
+.contact p {
+  color: var(--text-light);
+  max-width: 620px;
+  margin: 1.1rem auto 0;
+  position: relative;
+  z-index: 1;
+  font-size: 1.04rem;
+}
+
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-wa {
+  background: #25D366;
+  color: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+}
+
+.btn-wa:hover {
+  background: #20BA5A;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+}
+
+.btn-mail {
+  background: var(--navy-surface);
+  color: #FFFFFF;
+  border: 1px solid var(--border-dark);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.btn-mail:hover {
+  border-color: var(--emerald);
+  transform: translateY(-2px);
+  color: var(--emerald-light);
+}
+
+/* =========================================================
+   4. PIE DE PÁGINA (FOOTER) CORPORATIVO Y LEGAL (#0A192F)
+   ========================================================= */
+footer {
+  background: var(--navy-dark);
+  color: var(--text-light);
+  padding: 3.5rem 0 1.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  color: #FFFFFF;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.footer-brand span { color: var(--emerald); }
+
+.footer-links {
+  display: flex;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.footer-links a {
+  color: #94A3B8;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover { color: var(--emerald); }
+
+.socials {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.socials a {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #CBD5E1;
+  transition: all 0.25s ease;
+}
+
+.socials a:hover {
+  background: var(--emerald);
+  color: var(--navy-deep);
+  border-color: var(--emerald);
+  transform: translateY(-3px);
+}
+
+/* Barra Inferior Legal */
+.footer-legal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.5rem;
+  margin-top: 2.2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.copyright {
+  font-size: 0.78rem;
+  color: #64748B;
+}
+
+.legal-links {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.78rem;
+}
+
+.legal-links a {
+  color: #94A3B8;
+  transition: color 0.2s ease;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-links a:hover { color: var(--emerald); }
+.legal-sep { color: #475569; }
+
+/* =========================================================
+   MODAL DE DEMOSTRACIÓN EN VIDEO / PRESENTACIÓN DEL SISTEMA
+   ========================================================= */
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.video-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 47, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.video-modal-dialog {
+  position: relative;
+  z-index: 2;
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  width: min(840px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  transform: scale(0.94) translateY(15px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #FFFFFF;
+}
+
+.video-modal.open .video-modal-dialog {
+  transform: scale(1) translateY(0);
+}
+
+.video-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.modal-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--emerald-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.video-modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.modal-close-btn:hover {
+  background: var(--emerald);
+  border-color: var(--emerald);
+  color: var(--navy-deep);
+}
+
+.video-modal-body { padding: 1.6rem; }
+
+.presentation-player {
+  background: var(--navy-deep);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.presentation-stage {
+  min-height: 280px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08), transparent 70%), var(--navy-deep);
+}
+
+.demo-step {
+  display: none;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.demo-step.active { display: block; }
+
+.demo-step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--emerald-light);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.demo-step h4 {
+  font-size: 1.45rem;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+}
+
+.demo-step p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  max-width: 620px;
+  margin-bottom: 1.4rem;
+  line-height: 1.6;
+}
+
+.step-card-preview {
+  background: var(--navy-surface);
+  border: 1px solid var(--border-dark);
+  border-radius: 14px;
+  padding: 1.1rem;
+  max-width: 580px;
+}
+
+.step-preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.step-preview-row:last-child { border-bottom: none; }
+.step-preview-row span i { color: var(--emerald); margin-right: 0.5rem; }
+
+.presentation-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.p-tab-btn {
+  background: transparent;
+  border: 0;
+  padding: 1rem 0.8rem;
+  color: #94A3B8;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-bottom: 3px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.p-tab-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.p-tab-btn.active {
+  color: var(--emerald-light);
+  border-bottom-color: var(--emerald);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.video-modal-footer {
+  padding: 1.25rem 1.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.modal-footer-hint {
+  font-size: 0.78rem;
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-footer-hint i { color: var(--emerald); }
+
+.modal-footer-actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+/* =========================================================
+   ANIMACIONES Y RESPONSIVE
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.12s; }
+.delay-2 { transition-delay: 0.22s; }
+.delay-3 { transition-delay: 0.32s; }
+
+@keyframes floatCard1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+@keyframes floatCard2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes growBar {
+  from { transform: scaleY(0.08); opacity: 0.3; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes pulseEmerald {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+  .tech-action-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .view-card {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-inner { min-height: 70px; }
+  .menu-btn { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: var(--navy-deep);
+    padding: 1.2rem 5% 1.5rem;
+    border-bottom: 1px solid var(--border-navy);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.2rem;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a:not(.btn) { padding: 0.8rem 0.4rem; }
+  .nav-links .btn { margin-top: 0.6rem; }
+  .hero { padding: 4.8rem 0 4rem; }
+  .hero-b2b-kpis { gap: 1.2rem; padding: 1rem 1.4rem; }
+  .b2b-kpi-sep { display: none; }
+  .metric-card-top { top: -16px; right: -8px; }
+  .metric-card-bottom { bottom: -16px; left: -8px; }
+  .floating-chip-pill { display: none; }
+  .tech-grid,
+  .mv-grid,
+  .about-inner,
+  .view-card,
+  .download-panel,
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+  .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+  .presentation-tabs { grid-template-columns: 1fr; }
+  .footer-top, .footer-legal-bar {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-links, .legal-links { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .hero-actions .btn { width: 100%; }
+  .cards-grid, .benefit-grid { grid-template-columns: 1fr; }
+  .mock-kpis { grid-template-columns: 1fr; }
+  .floating-metric-card { padding: 0.75rem 0.9rem; gap: 0.6rem; }
+  .metric-icon-circle { width: 36px; height: 36px; font-size: 1rem; }
+  .metric-num { font-size: 1.2rem; }
+  .metric-title { font-size: 0.75rem; }
+  .metric-sub { font-size: 0.64rem; }
+  .contact-buttons .btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     BARRA SUPERIOR (NAVBAR)
+     ========================================================= -->
+<header class="navbar">
+  <div class="container nav-inner">
+    <a class="logo" href="#inicio" aria-label="StockPOS, volver al inicio">
+      <img src="https://uploads.onecompiler.io/44rr6xv3d/1792545949801/logo%20stock%C3%82%C2%B4ps.png" alt="Logotipo de StockPOS" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+      <span class="logo-mark" style="display:none"><i class="fa-solid fa-cubes-stacked"></i></span>
+      <span>
+        <span class="brand">Stock<span>POS</span></span>
+        <span class="slogan">Soluciones de Software de Punto de Venta &amp; Gestión B2B</span>
+      </span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#tecnologia">Tecnología</a>
+      <a href="#mision-vision">Nosotros</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#vistas">Vistas</a>
+      <a href="#comentarios">Opiniones</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#descargar" class="btn btn-emerald"><i class="fa-solid fa-download"></i> Descargar</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+<main>
+  <!-- =========================================================
+       1. PORTADA PRINCIPAL CORPORATIVA (HERO SECTION)
+       Con video multimedia de fondo con autoplay, loop, muted, playsinline
+       y capa semitransparente azul marino (#0A192F) para legibilidad
+       ========================================================= -->
+  <section class="hero" id="inicio">
+    <div class="hero-video-wrap">
+      <video class="hero-bg-video" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
+        <source src="mi-video.mp4" type="video/mp4">
+        <source src="mi-video.mp4.mp4" type="video/mp4">
+        <source src="./mi-video.mp4" type="video/mp4">
+      </video>
+      <div class="hero-video-overlay"></div>
+    </div>
+
+    <div class="container hero-container">
+      <div class="reveal">
+        <!-- Subtítulo / Badge Empresarial -->
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>SOFTWARE EMPRESARIAL B2B · TRANSFORMACIÓN DIGITAL PARA COMERCIOS</span>
+        </div>
+
+        <!-- Título y Slogan Empresarial con resaltado en Verde Esmeralda (#10B981) -->
+        <h1 class="hero-title">
+          Tu negocio en orden, <span class="highlight-emerald">tus ventas al instante.</span>
+        </h1>
+
+        <!-- Párrafo de Propuesta de Valor B2B -->
+        <p class="hero-desc">
+          En StockPOS impulsamos la transformación digital y el rendimiento comercial de pequeños, medianos y grandes negocios minoristas. Desarrollamos soluciones tecnológicas empresariales que integran punto de venta de alta velocidad, administración de inventarios multisede y analítica de datos en la nube para maximizar tu rentabilidad y control operativo.
+        </p>
+
+        <!-- Botones de Acción Principal -->
+        <div class="hero-actions">
+          <a class="btn btn-emerald" href="#contacto">
+            <i class="fa-solid fa-calendar-check"></i> Solicitar Demostración
+          </a>
+          <button type="button" class="btn btn-video" id="openVideoBtn" aria-haspopup="dialog" aria-expanded="false">
+            <span class="btn-video-icon"><i class="fa-solid fa-play"></i></span>
+            <span>Ver Demostración</span>
+          </button>
+        </div>
+
+        <!-- Métricas / Indicadores B2B de Confianza -->
+        <div class="hero-b2b-kpis">
+          <div class="b2b-kpi-item">
+            <strong class="b2b-val">+500</strong>
+            <span class="b2b-lbl">Comercios Conectados</span>
+          </div>
+          <div class="b2b-kpi-sep"></div>
+          <div class="b2b-kpi-item">
+            <strong class="b2b-val">99.9%</strong>
+            <span class="b2b-lbl">Disponibilidad Cloud</span>
+          </div>
+          <div class="b2b-kpi-sep"></div>
+          <div class="b2b-kpi-item">
+            <strong class="b2b-val">&lt; 5 seg</strong>
+            <span class="b2b-lbl">Tiempo Medio de Cobro</span>
+          </div>
+          <div class="b2b-kpi-sep"></div>
+          <div class="b2b-kpi-item">
+            <strong class="b2b-val">100%</strong>
+            <span class="b2b-lbl">Respaldo Automatizado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       2. SECCIÓN DE DEMOSTRACIÓN TÉCNICA Y TERMINAL (REUBICADA)
+       "Nuestra Tecnología en Acción" - Justo debajo de la portada
+       ========================================================= -->
+  <section class="tech-action-section" id="tecnologia">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="kicker">TECNOLOGÍA DE GRADO EMPRESARIAL</div>
+        <h2>Nuestra Tecnología en Acción</h2>
+        <p>Conoce la arquitectura técnica y la agilidad operativa de StockPOS Pro Terminal: diseñada para procesar altos volúmenes de venta con máxima estabilidad.</p>
+      </div>
+
+      <div class="tech-action-grid">
+        <!-- Columna Izquierda: Capacidades Clave -->
+        <div class="tech-capabilities reveal">
+          <div class="capability-card">
+            <div class="cap-icon"><i class="fa-solid fa-cash-register"></i></div>
+            <div>
+              <h3>Caja de Alto Rendimiento</h3>
+              <p>Emisión ultra rápida de tickets, compatibilidad con lectores ópticos, básculas y múltiples modalidades de cobro (efectivo, tarjeta, transferencias).</p>
+            </div>
+          </div>
+          <div class="capability-card">
+            <div class="cap-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <div>
+              <h3>Sincronización en Tiempo Real</h3>
+              <p>Cada venta descuenta existencias al instante en la base de datos central, emitiendo alertas automatizadas de reabastecimiento crítico.</p>
+            </div>
+          </div>
+          <div class="capability-card">
+            <div class="cap-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <div>
+              <h3>Analítica Gerencial en la Nube</h3>
+              <p>Visibilidad financiera total con reportes consolidados de utilidades, cortes de caja Z/X y comportamiento del consumidor 24/7.</p>
+            </div>
+          </div>
+          <div class="tech-cta-box">
+            <button type="button" class="btn btn-emerald btn-open-demo" id="openVideoBtn2">
+              <i class="fa-solid fa-circle-play"></i> Probar Simulador Interactivo del Sistema
+            </button>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Vista Previa Interactiva StockPOS Pro Terminal + Tarjetas Flotantes -->
+        <div class="tech-mockup-wrapper reveal delay-1">
+          <div class="pos-mockup" aria-label="Demostración visual del sistema StockPOS">
+            <!-- Barra superior estilo terminal -->
+            <div class="mock-topbar">
+              <div class="mock-window-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="mock-system-title">
+                <img src="https://uploads.onecompiler.io/44rr6xv3d/1792545949801/logo%20stock%C3%82%C2%B4ps.png" alt="StockPOS" onerror="this.style.display='none'">
+                <span>Stock<strong>POS</strong> Pro Terminal</span>
+              </div>
+              <div class="mock-status-pill">
+                <span class="online-dot"></span> EN LÍNEA
+              </div>
+            </div>
+
+            <!-- Contenido del Mockup -->
+            <div class="mock-body">
+              <!-- Métricas Rápidas Superiores -->
+              <div class="mock-kpis">
+                <div class="mock-kpi-card">
+                  <span class="kpi-label"><i class="fa-solid fa-chart-line text-emerald"></i> Ventas del Día</span>
+                  <strong class="kpi-value">$8,450.00</strong>
+                  <span class="kpi-change"><i class="fa-solid fa-arrow-up"></i> +18.4% vs ayer</span>
+                </div>
+                <div class="mock-kpi-card">
+                  <span class="kpi-label"><i class="fa-solid fa-receipt text-emerald"></i> Cobros en Caja</span>
+                  <strong class="kpi-value">142 tickets</strong>
+                  <span class="kpi-change"><i class="fa-solid fa-bolt"></i> 100% exitosos</span>
+                </div>
+              </div>
+
+              <!-- Terminal de Cobro en Vivo -->
+              <div class="mock-pos-terminal">
+                <div class="terminal-header">
+                  <span><strong><i class="fa-solid fa-cart-shopping text-emerald"></i> Venta Activa #1042</strong></span>
+                  <span>12:45 PM · Caja 01</span>
+                </div>
+                <div class="cart-item-row">
+                  <span><i class="fa-solid fa-barcode"></i> Refresco 600 ml (x2)</span>
+                  <span class="cart-item-price">$40.00</span>
+                </div>
+                <div class="cart-item-row">
+                  <span><i class="fa-solid fa-barcode"></i> Botana Mixta 150g (x1)</span>
+                  <span class="cart-item-price">$25.00</span>
+                </div>
+                <div class="cart-item-row">
+                  <span><i class="fa-solid fa-barcode"></i> Leche Entera 1 L (x1)</span>
+                  <span class="cart-item-price">$28.00</span>
+                </div>
+                <div class="terminal-total-row">
+                  <div>
+                    <span class="total-txt">Total a cobrar</span>
+                    <div class="total-amt">$93.00</div>
+                  </div>
+                  <button type="button" class="btn-mock-charge"><i class="fa-solid fa-credit-card"></i> Cobrar (F12)</button>
+                </div>
+              </div>
+
+              <!-- Mini gráfico semanal -->
+              <div class="mock-sales-chart">
+                <div class="chart-header">
+                  <span>Actividad semanal de ventas</span>
+                  <span style="color:var(--emerald-light)">Picos en horas pico</span>
+                </div>
+                <div class="chart-bars-wrap">
+                  <span title="Lunes"></span>
+                  <span title="Martes"></span>
+                  <span title="Miércoles"></span>
+                  <span title="Jueves"></span>
+                  <span title="Viernes"></span>
+                  <span title="Sábado"></span>
+                  <span title="Domingo"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TARJETAS FLOTANTES DE MÉTRICAS -->
+          <!-- Tarjeta 1: Arriba a la derecha (98% Eficiencia en caja) -->
+          <div class="floating-metric-card metric-card-top">
+            <div class="metric-icon-circle">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="metric-data">
+              <span class="metric-num">98%</span>
+              <strong class="metric-title">Eficiencia en caja</strong>
+              <span class="metric-sub"><i class="fa-solid fa-stopwatch"></i> Cobros en &lt; 5 seg</span>
+            </div>
+          </div>
+
+          <!-- Tarjeta 2: Abajo a la izquierda (100% Sincronizado en la nube) -->
+          <div class="floating-metric-card metric-card-bottom">
+            <div class="metric-icon-circle">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <div class="metric-data">
+              <span class="metric-num">100%</span>
+              <strong class="metric-title">Sincronizado en la nube</strong>
+              <span class="metric-sub"><i class="fa-solid fa-shield-halved"></i> Cero pérdida de datos</span>
+            </div>
+          </div>
+
+          <!-- Tarjeta 3: Pill flotante de estado -->
+          <div class="floating-chip-pill">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Inventario sincronizado 24/7</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER DE ANUNCIOS / COMUNICADOS -->
+  <div class="anuncios" aria-label="Comunicados y avisos">
+    <img src="https://uploads.onecompiler.io/456xy997m/1792763377842/WhatsApp%20Image%202026-10-23%20at%207.49.11%20AM.jpeg" class="active" alt="Anuncio 1">
+    <img src="https://uploads.onecompiler.io/456xy997m/1792763643264/WhatsApp%20Image%202026-10-23%20at%207.53.47%20AM.jpeg" alt="Anuncio 2">
+  </div>
+
+  <!-- =========================================================
+       3. ENFOQUE INSTITUCIONAL Y EMPRESARIAL: NOSOTROS (MISIÓN Y VISIÓN)
+       ========================================================= -->
+  <section class="mv-section" id="mision-vision">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="kicker">COMPROMISO CORPORATIVO &amp; VALORES</div>
+        <h2>Soluciones tecnológicas desarrolladas para impulsar el comercio</h2>
+        <p>Como empresa desarrolladora de software B2B, nuestro compromiso es proveer a pequeños y medianos comercios herramientas de nivel empresarial que democraticen la digitalización y eleven la competitividad comercial.</p>
+      </div>
+      <div class="mv-grid">
+        <article class="mv-card reveal">
+          <div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>Nuestra Misión Empresarial</h3>
+          <p>Desarrollar y suministrar soluciones de punto de venta e inventario intuitivas, confiables y escalables que aceleren las operaciones diarias de las empresas minoristas y optimicen la toma de decisiones basada en datos.</p>
+        </article>
+        <article class="mv-card reveal delay-1">
+          <div class="mv-icon"><i class="fa-solid fa-rocket"></i></div>
+          <h3>Nuestra Visión Estratégica</h3>
+          <p>Consolidarnos como el proveedor tecnológico preferente de comercios independientes y cadenas comerciales en la región, reconocidos por la solidez de nuestra plataforma en la nube y la cercanía de nuestro servicio.</p>
+        </article>
+        <article class="mv-card reveal delay-2">
+          <div class="mv-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Pilares de Calidad B2B</h3>
+          <p>Seguridad estricta de la información, innovación continua con respaldo en la nube, soporte técnico especializado y desarrollo centrado 100% en la rentabilidad y flujo del negocio.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ENFOQUE TECNOLÓGICO
+       ========================================================= -->
+  <section class="tech-strip" aria-label="Enfoque de StockPOS">
+    <div class="container tech-grid">
+      <article class="tech-item reveal">
+        <span class="tech-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <div>
+          <strong>Seguridad y Control de Acceso</strong>
+          <p>Arquitectura con segregación de roles para cajeros, encargados de almacén y directivos.</p>
+        </div>
+      </article>
+      <article class="tech-item reveal delay-1">
+        <span class="tech-icon"><i class="fa-solid fa-chart-line"></i></span>
+        <div>
+          <strong>Información Visual y KPIs</strong>
+          <p>Paneles ejecutivos diseñados para una interpretación rápida y certera de la liquidez.</p>
+        </div>
+      </article>
+      <article class="tech-item reveal delay-2">
+        <span class="tech-icon"><i class="fa-solid fa-laptop"></i></span>
+        <div>
+          <strong>Diseño Multiplataforma</strong>
+          <p>Plataforma optimizada para correr con total fluidez en PC de escritorio, terminales táctiles y tablets.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONOCE STOCKPOS - FRANJA MARINO CORPORATIVO
+       ========================================================= -->
+  <section class="about-strip">
+    <div class="container about-inner reveal">
+      <div>
+        <div class="kicker" style="color:var(--emerald-light)">Solución Integral</div>
+        <h2>Menos enredos en tu día.<br><span>Más tiempo para hacer crecer tu empresa.</span></h2>
+      </div>
+      <div>
+        <p>StockPOS centraliza los procesos comerciales más críticos en un único ecosistema: desde el alta y control de catálogo hasta la reconciliación de caja diaria y exportación de reportes contables.</p>
+        <div class="about-pills">
+          <span><i class="fa-solid fa-bag-shopping"></i> Boutiques y Moda</span>
+          <span><i class="fa-solid fa-store"></i> Minimarkets y Abarrotes</span>
+          <span><i class="fa-solid fa-boxes-stacked"></i> Almacenes Minoristas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FUNCIONES ESENCIALES
+       ========================================================= -->
+  <section class="features-section" id="funciones">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="kicker">Módulos Especializados</div>
+        <h2>Todo lo que tu comercio necesita</h2>
+        <p>Herramientas modulares creadas para hacer el trabajo diario más productivo, exacto y rentable.</p>
+      </div>
+      <div class="cards-grid">
+        <article class="feature-card reveal">
+          <span class="num-tag">01</span>
+          <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+          <h3>Punto de Venta</h3>
+          <p>Registra compras, administra carritos de clientes simultáneos y consulta importes con total transparencia.</p>
+          <span class="tag">RÁPIDO · PRÁCTICO</span>
+        </article>
+        <article class="feature-card reveal delay-1">
+          <span class="num-tag">02</span>
+          <div class="card-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+          <h3>Inventario Inteligente</h3>
+          <p>Clasifica por departamentos, actualiza listas de precios masivas y detecta quiebres de existencias a tiempo.</p>
+          <span class="tag">ORDENA · SUPERVISA</span>
+        </article>
+        <article class="feature-card reveal delay-2">
+          <span class="num-tag">03</span>
+          <div class="card-icon"><i class="fa-solid fa-chart-column"></i></div>
+          <h3>Reportes y Dashboard</h3>
+          <p>Métricas de facturación, cortes de caja Z/X y análisis de productos más vendidos para fundamentar compras.</p>
+          <span class="tag">ANALIZA · MEJORA</span>
+        </article>
+        <article class="feature-card reveal delay-3">
+          <span class="num-tag">04</span>
+          <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Gestión de Usuarios</h3>
+          <p>Configuración granular de permisos por turno, protegiendo las funciones de auditoría y precios especiales.</p>
+          <span class="tag">ACCESO · CONTROL</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VISTAS DEL SISTEMA
+       ========================================================= -->
+  <section class="views-section" id="vistas">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="kicker">Demostración en Pantalla</div>
+        <h2>Cuatro vistas principales, <span class="highlight-emerald">todo bajo control</span></h2>
+        <p>Prototipos funcionales de los entornos operativos que utilizan los comercios afiliados.</p>
+      </div>
+      <div class="view-list">
+        <!-- Vista 1: Login -->
+        <article class="view-card reveal">
+          <div class="view-copy">
+            <div class="view-title">
+              <span class="view-number">1</span>
+              <h3>Inicio de Sesión y Autenticación</h3>
+            </div>
+            <p>Acceso seguro para que cada colaborador inicie su jornada con las credenciales y permisos correspondientes.</p>
+            <ul>
+              <li><i class="fa-solid fa-check-circle"></i> Autenticación por usuario y rol operativo</li>
+              <li><i class="fa-solid fa-check-circle"></i> Recuperación de acceso confidencial</li>
+              <li><i class="fa-solid fa-check-circle"></i> Interfaz libre de distracciones</li>
+              <li><i class="fa-solid fa-check-circle"></i> Cierre automático por inactividad de caja</li>
+            </ul>
+          </div>
+          <div class="preview">
+            <div class="preview-head">
+              <strong><i class="fa-solid fa-shield-halved text-emerald"></i> Acceso Seguro StockPOS</strong>
+              <span>Vista de ejemplo</span>
+            </div>
+            <div class="login-form">
+              <div class="mini-logo"><i class="fa-solid fa-cubes-stacked text-emerald"></i> Stock<span>POS</span></div>
+              <p style="font-size:.75rem;color:#CBD5E1">Portal Corporativo B2B</p>
+              <div class="fake-input"><i class="fa-regular fa-envelope"></i> &nbsp; Correo corporativo</div>
+              <div class="fake-input"><i class="fa-solid fa-lock"></i> &nbsp; Contraseña</div>
+              <div class="fake-button">Ingresar al sistema</div>
+              <p style="font-size:.65rem;color:#94A3B8;margin-top:.7rem">¿Requiere asistencia de soporte?</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vista 2: Punto de venta -->
+        <article class="view-card reveal">
+          <div class="view-copy">
+            <div class="view-title">
+              <span class="view-number">2</span>
+              <h3>Terminal Punto de Venta (POS)</h3>
+            </div>
+            <p>Módulo de cobro ágil para atender clientes con rapidez y exactitud, reduciendo filas en mostrador.</p>
+            <ul>
+              <li><i class="fa-solid fa-check-circle"></i> Lectura instantánea con escáner USB/Bluetooth</li>
+              <li><i class="fa-solid fa-check-circle"></i> Cobro multiformato (Efectivo, Tarjeta, Transferencia)</li>
+              <li><i class="fa-solid fa-check-circle"></i> Cálculo automático de cambio e impuestos</li>
+            </ul>
+          </div>
+          <div class="preview">
+            <div class="preview-head">
+              <strong><i class="fa-solid fa-cart-shopping text-emerald"></i> Punto de Venta</strong>
+              <span>Caja 01 · Terminal Activa</span>
+            </div>
+            <table class="products">
+              <thead>
+                <tr><th>Producto</th><th>Cant.</th><th>Precio</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Refresco 600 ml</td><td>2</td><td>$40.00</td></tr>
+                <tr><td>Botanas Mixtas</td><td>1</td><td>$18.00</td></tr>
+                <tr><td>Leche Entera 1 L</td><td>1</td><td>$26.00</td></tr>
+              </tbody>
+            </table>
+            <div style="display:flex;justify-content:space-between;padding:1rem .3rem .3rem;font-size:.8rem">
+              <span style="color:#CBD5E1">Total a liquidar</span>
+              <strong style="color:var(--emerald-light);font-size:1.2rem">$84.00</strong>
+            </div>
+            <div class="fake-button">Proceder al Cobro (F12)</div>
+          </div>
+        </article>
+
+        <!-- Vista 3: Inventario -->
+        <article class="view-card reveal">
+          <div class="view-copy">
+            <div class="view-title">
+              <span class="view-number">3</span>
+              <h3>Inventario y Almacén</h3>
+            </div>
+            <p>Supervisión en tiempo real de unidades disponibles, puntos de reorden y costos de adquisición.</p>
+            <ul>
+              <li><i class="fa-solid fa-check-circle"></i> Catálogo ordenado por departamentos</li>
+              <li><i class="fa-solid fa-check-circle"></i> Alertas preventivas de stock mínimo</li>
+              <li><i class="fa-solid fa-check-circle"></i> Historial de mermas y entradas de mercancía</li>
+            </ul>
+          </div>
+          <div class="preview">
+            <div class="preview-head">
+              <strong><i class="fa-solid fa-boxes-stacked text-emerald"></i> Maestro de Inventario</strong>
+              <span>Almacén Central</span>
+            </div>
+            <table class="products">
+              <thead>
+                <tr><th>Producto</th><th>Stock</th><th>Estado</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Refresco 600 ml</td><td>85</td><td><span class="status">Disponible</span></td></tr>
+                <tr><td>Botanas</td><td>12</td><td><span class="status warn">Stock bajo</span></td></tr>
+                <tr><td>Leche 1 L</td><td>4</td><td><span class="status low">Reorden urgente</span></td></tr>
+                <tr><td>Aceite 850 ml</td><td>28</td><td><span class="status">Disponible</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- Vista 4: Reportes -->
+        <article class="view-card reveal">
+          <div class="view-copy">
+            <div class="view-title">
+              <span class="view-number">4</span>
+              <h3>Reportes Gerenciales</h3>
+            </div>
+            <p>Indicadores clave de rendimiento comercial y financiero con opción a exportación en PDF o Excel.</p>
+            <ul>
+              <li><i class="fa-solid fa-check-circle"></i> Comparativa de ventas por día, semana y mes</li>
+              <li><i class="fa-solid fa-check-circle"></i> Rentabilidad real por línea de artículo</li>
+              <li><i class="fa-solid fa-check-circle"></i> Cortes de turno sin discrepancias de caja</li>
+            </ul>
+          </div>
+          <div class="preview">
+            <div class="preview-head">
+              <strong><i class="fa-solid fa-chart-line text-emerald"></i> Panel de Ventas en Vivo</strong>
+              <span>Consolidado Hoy</span>
+            </div>
+            <div class="preview-stats">
+              <div class="preview-stat"><small>Hoy</small><strong>$5,420</strong></div>
+              <div class="preview-stat"><small>Esta semana</small><strong>$28,450</strong></div>
+              <div class="preview-stat"><small>Este mes</small><strong>$112,300</strong></div>
+            </div>
+            <div style="margin-top:.85rem">
+              <div class="chart-header">
+                <span>Comportamiento Semanal</span>
+                <span style="color:var(--emerald-light)">Tendencia Alza</span>
+              </div>
+              <div class="mini-chart">
+                <i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       BENEFICIOS EMPRESARIALES
+       ========================================================= -->
+  <section class="benefits" id="beneficios">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="kicker" style="color:var(--emerald-light)">Ventajas Competitivas</div>
+        <h2>Hecho para acompañar el crecimiento de tu empresa</h2>
+        <p>Una plataforma de software pensada para combinar solidez técnica con facilidad de operación.</p>
+      </div>
+      <div class="benefit-grid">
+        <article class="benefit reveal">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <h3>Curva de Aprendizaje Mínima</h3>
+          <p>Tus cajeros y dependientes dominan el sistema en menos de 15 minutos de capacitación.</p>
+        </article>
+        <article class="benefit reveal delay-1">
+          <i class="fa-solid fa-box-open"></i>
+          <h3>Control Total de Existencias</h3>
+          <p>Elimina pérdidas misteriosas y desabastos con la trazabilidad automática de cada producto.</p>
+        </article>
+        <article class="benefit reveal delay-2">
+          <i class="fa-solid fa-chart-simple"></i>
+          <h3>Métricas Ejecutivas en Tiempo Real</h3>
+          <p>Accede al estado de tu negocio desde cualquier computadora o dispositivo conectado.</p>
+        </article>
+        <article class="benefit reveal">
+          <i class="fa-solid fa-users"></i>
+          <h3>Estructura Multi-Rol</h3>
+          <p>Configura cuentas individuales con accesos blindados para cada miembro de tu equipo.</p>
+        </article>
+        <article class="benefit reveal delay-1">
+          <i class="fa-solid fa-cloud"></i>
+          <h3>Arquitectura Cloud Resiliente</h3>
+          <p>Respaldos automáticos continuos para garantizar que jamás pierdas una venta o corte de caja.</p>
+        </article>
+        <article class="benefit reveal delay-2">
+          <i class="fa-solid fa-store"></i>
+          <h3>Especialización en Comercio Minorista</h3>
+          <p>Desarrollado específicamente conociendo los desafíos reales de las pymes de retail.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       DESCARGA / SOLICITUD
+       ========================================================= -->
+  <section class="download-section" id="descargar">
+    <div class="container">
+      <div class="download-panel reveal">
+        <div>
+          <div class="kicker" style="color:var(--emerald-light)">Digitaliza tu comercio hoy</div>
+          <h2>Tu empresa, más organizada.<br><span>Tu siguiente etapa comercial comienza aquí.</span></h2>
+          <p>Agenda una demostración guiada con uno de nuestros consultores de software para analizar cómo StockPOS optimiza tus cobros e inventarios.</p>
+          <div class="download-actions">
+            <a class="btn btn-emerald" href="#contacto"><i class="fa-solid fa-paper-plane"></i> Solicitar Demostración</a>
+            <a class="btn btn-outline-navy" href="#vistas"><i class="fa-regular fa-eye"></i> Explorar Módulos</a>
+          </div>
+          <p class="download-note">Disponible para Windows y plataformas compatibles con navegadores modernos.</p>
+        </div>
+        <div class="download-art">
+          <div class="app-icon"><i class="fa-solid fa-cubes-stacked"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       OPINIONES / TESTIMONIOS EJECUTIVOS
+       ========================================================= -->
+  <section class="reviews" id="comentarios">
+    <div class="container">
+      <div class="section-heading reveal">
+        <div class="kicker">Casos de Éxito &amp; Testimonios</div>
+        <h2>La confianza de comercios que crecen con StockPOS</h2>
+        <p>Empresarios y comerciantes comparten el impacto operativo de nuestra plataforma en sus negocios.</p>
+      </div>
+      <div class="review-grid">
+        <article class="review reveal">
+          <div class="review-top">
+            <div class="avatar"><img src="https://uploads.onecompiler.io/44rr6xv3d/1792545220082/user1.jpg" alt="Avatar cliente"></div>
+            <div>
+              <strong>Boutique &amp; Calzado Altamirano</strong>
+              <small>Cadena de 2 sucursales</small>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>“El control de inventario en tiempo real nos ahorró horas de conteos manuales. Nuestros cobros en mostrador son notablemente más ágiles.”</p>
+        </article>
+        <article class="review reveal delay-1">
+          <div class="review-top">
+            <div class="avatar"><img src="https://uploads.onecompiler.io/44rr6xv3d/1792545223065/user2.jpg" alt="Avatar cliente"></div>
+            <div>
+              <strong>Minimarket San Francisco</strong>
+              <small>Comercio de abarrotes</small>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>“La facilidad para dar de alta productos y revisar las utilidades del día desde mi teléfono le dio un orden absoluto a mi tienda.”</p>
+        </article>
+        <article class="review reveal delay-2">
+          <div class="review-top">
+            <div class="avatar"><img src="https://uploads.onecompiler.io/44rr6xv3d/1792545225614/user3.jpg" alt="Avatar cliente"></div>
+            <div>
+              <strong>Distribuidora Papantla Express</strong>
+              <small>Venta mayoreo y menudeo</small>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>“Excelente software empresarial: rápido, seguro y con un equipo de soporte técnico que siempre atiende con profesionalismo.”</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONTACTO
+       ========================================================= -->
+  <section class="contact-wrap" id="contacto">
+    <div class="container">
+      <div class="contact reveal">
+        <div class="kicker" style="color:var(--emerald-light)">Atención Comercial B2B</div>
+        <h2>¿Listo para digitalizar el punto de venta de tu negocio?</h2>
+        <p>Ponte en contacto con nuestro equipo comercial para solicitar una cotización personalizada o agendar una demostración técnica en vivo.</p>
+        <div class="contact-buttons">
+          <a class="btn btn-wa" href="https://wa.link/ezqvn2" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-whatsapp"></i> Contactar Asesor por WhatsApp
+          </a>
+          <a class="btn btn-mail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=biancanahomy2107@gmail.com&amp;su=Solicitud%20de%20Demostraci%C3%B3n%20StockPOS" target="_blank" rel="noopener noreferrer">
+            <i class="fa-regular fa-envelope"></i> Enviar Correo Corporativo
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- =========================================================
+     MODAL DE VIDEO / DEMOSTRACIÓN DEL SISTEMA
+     ========================================================= -->
+<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
+  <div class="video-modal-dialog">
+    <div class="video-modal-header">
+      <div class="modal-title-wrap">
+        <span class="modal-badge"><i class="fa-solid fa-circle-play"></i> Demostración Interactiva B2B</span>
+        <h3 id="modalTitle">StockPOS en Acción · Presentación Técnica del Sistema</h3>
+      </div>
+      <button type="button" class="modal-close-btn" id="closeVideoBtn" aria-label="Cerrar modal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="video-modal-body">
+      <div class="presentation-player">
+        <div class="presentation-stage">
+          <!-- Paso 1: Cobro en Caja -->
+          <div class="demo-step active" data-step="1">
+            <span class="demo-step-badge"><i class="fa-solid fa-cash-register"></i> Módulo 1 de 3: Punto de Venta</span>
+            <h4>Cobros Rápidos y Emisión de Tickets en &lt; 5 Segundos</h4>
+            <p>Escanea códigos de barras, agrega productos con un solo clic y procesa pagos en efectivo, tarjeta o transferencias sin demoras en tu mostrador.</p>
+            <div class="step-card-preview">
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-check"></i> Escaneo de alta frecuencia con lector óptico</span>
+                <strong style="color:var(--emerald-light)">Operativo</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-check"></i> Desglose automático de IVA y cambio</span>
+                <strong style="color:var(--emerald-light)">Instantáneo</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-check"></i> Compatibilidad con impresoras térmicas de 58mm y 80mm</span>
+                <strong style="color:var(--emerald-light)">Universal</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 2: Inventario -->
+          <div class="demo-step" data-step="2">
+            <span class="demo-step-badge"><i class="fa-solid fa-boxes-stacked"></i> Módulo 2 de 3: Inventario Inteligente</span>
+            <h4>Control de Stock en Tiempo Real y Alertas de Reabastecimiento</h4>
+            <p>Cada venta descuenta automáticamente las existencias. Recibe avisos cuando un artículo esté por agotarse y programa tus compras a proveedores.</p>
+            <div class="step-card-preview">
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-bell"></i> Alerta de stock mínimo configurable</span>
+                <strong style="color:#F59E0B">Activa</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-layer-group"></i> Categorización por departamentos y marcas</span>
+                <strong style="color:var(--emerald-light)">Organizado</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-rotate"></i> Historial de entradas y mermas</span>
+                <strong style="color:var(--emerald-light)">100% Trazable</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 3: Métricas y Nube -->
+          <div class="demo-step" data-step="3">
+            <span class="demo-step-badge"><i class="fa-solid fa-chart-line"></i> Módulo 3 de 3: Métricas y Reportes</span>
+            <h4>Dashboard Ejecutivo con Métricas en la Nube 24/7</h4>
+            <p>Monitorea las ventas del día, productos más vendidos, márgenes de utilidad y corte de caja desde cualquier dispositivo conectado.</p>
+            <div class="step-card-preview">
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-cloud-arrow-up"></i> Sincronización continua en la nube</span>
+                <strong style="color:var(--emerald-light)">En línea</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-file-invoice-dollar"></i> Reportes descargables de corte de caja</span>
+                <strong style="color:var(--emerald-light)">PDF / Excel</strong>
+              </div>
+              <div class="step-preview-row">
+                <span><i class="fa-solid fa-arrow-trend-up"></i> Indicadores de rentabilidad en tiempo real</span>
+                <strong style="color:var(--emerald-light)">Actualizado</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="presentation-tabs">
+          <button type="button" class="p-tab-btn active" data-target="1"><i class="fa-solid fa-cart-shopping"></i> 1. Punto de Venta</button>
+          <button type="button" class="p-tab-btn" data-target="2"><i class="fa-solid fa-boxes-stacked"></i> 2. Inventario</button>
+          <button type="button" class="p-tab-btn" data-target="3"><i class="fa-solid fa-chart-pie"></i> 3. Reportes en Nube</button>
+        </div>
+      </div>
+    </div>
+    <div class="video-modal-footer">
+      <div class="modal-footer-hint">
+        <i class="fa-solid fa-shield-halved"></i> ¿Deseas una demostración personalizada con el catálogo de tu comercio?
+      </div>
+      <div class="modal-footer-actions">
+        <a href="#contacto" class="btn btn-emerald" id="modalContactCta"><i class="fa-solid fa-calendar-check"></i> Agendar Demostración</a>
+        <button type="button" class="btn btn-outline-navy" id="modalCloseSecondary">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     4. PIE DE PÁGINA (FOOTER) CORPORATIVO Y LEGAL (#0A192F)
+     ========================================================= -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <a href="#inicio">
+        <div class="footer-brand">Stock<span>POS</span></div>
+        <div style="font-size:.74rem;color:#94A3B8;margin-top:.2rem">Soluciones de Software de Punto de Venta &amp; Gestión Comercial B2B</div>
+      </a>
+      <nav class="footer-links" aria-label="Enlaces del pie de página">
+        <a href="#inicio">Inicio</a>
+        <a href="#tecnologia">Tecnología</a>
+        <a href="#mision-vision">Nosotros</a>
+        <a href="#funciones">Funciones</a>
+        <a href="#vistas">Vistas</a>
+        <a href="#descargar">Descargar</a>
+        <a href="#comentarios">Opiniones</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="socials">
+        <a href="https://wa.link/ezqvn2" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=biancanahomy2107@gmail.com&amp;su=Informaci%C3%B3n%20sobre%20StockPOS" target="_blank" rel="noopener noreferrer" aria-label="Correo electrónico"><i class="fa-regular fa-envelope"></i></a>
+        <a href="#inicio" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></a>
+      </div>
+    </div>
+
+    <!-- Barra inferior con Copyright y Accesos Legales funcionales -->
+    <div class="footer-legal-bar">
+      <div class="copyright">
+        © 2026 StockPOS — Soluciones Tecnológicas de Software Empresarial. Papantla, Veracruz. Todos los derechos reservados.
+      </div>
+      <div class="legal-links">
+        <a href="terminos.html"><i class="fa-solid fa-scale-balanced"></i> Términos y Condiciones de Servicio</a>
+        <span class="legal-sep">·</span>
+        <a href="privacidad.html"><i class="fa-solid fa-shield-halved"></i> Aviso de Privacidad</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Menú móvil responsive
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+});
+navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  menuBtn.setAttribute('aria-expanded', 'false');
+  menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+}));
+
+// Efecto Reveal al hacer scroll
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Carrusel de Anuncios
+const anuncios = [...document.querySelectorAll('.anuncios img')].filter(img => img.getAttribute('src')?.trim());
+let anuncioActual = 0;
+if (anuncios.length > 1) {
+  setInterval(() => {
+    anuncios[anuncioActual].classList.remove('active');
+    anuncioActual = (anuncioActual + 1) % anuncios.length;
+    anuncios[anuncioActual].classList.add('active');
+  }, 5000);
+}
+
+// Modal de Demostración en Video / Presentación del Sistema
+const demoTriggerButtons = document.querySelectorAll('#openVideoBtn, #openVideoBtn2, .btn-open-demo');
+const videoModal = document.getElementById('videoModal');
+const closeVideoBtn = document.getElementById('closeVideoBtn');
+const videoModalBackdrop = document.getElementById('videoModalBackdrop');
+const modalCloseSecondary = document.getElementById('modalCloseSecondary');
+const modalContactCta = document.getElementById('modalContactCta');
+
+function openDemoModal() {
+  videoModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  demoTriggerButtons.forEach(btn => btn.setAttribute('aria-expanded', 'true'));
+  startPresentationTimer();
+}
+
+function closeDemoModal() {
+  videoModal.classList.remove('open');
+  document.body.style.overflow = '';
+  demoTriggerButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+  stopPresentationTimer();
+}
+
+demoTriggerButtons.forEach(btn => btn.addEventListener('click', openDemoModal));
+if (closeVideoBtn) closeVideoBtn.addEventListener('click', closeDemoModal);
+if (videoModalBackdrop) videoModalBackdrop.addEventListener('click', closeDemoModal);
+if (modalCloseSecondary) modalCloseSecondary.addEventListener('click', closeDemoModal);
+if (modalContactCta) modalContactCta.addEventListener('click', closeDemoModal);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && videoModal.classList.contains('open')) {
+    closeDemoModal();
+  }
+});
+
+// Pestañas y rotación interactiva en el reproductor de presentación
+const tabButtons = document.querySelectorAll('.p-tab-btn');
+const demoSteps = document.querySelectorAll('.demo-step');
+let currentStepIdx = 0;
+let presentationTimer = null;
+
+function setStep(index) {
+  currentStepIdx = index;
+  tabButtons.forEach((btn, i) => {
+    btn.classList.toggle('active', i === index);
+  });
+  demoSteps.forEach((step, i) => {
+    step.classList.toggle('active', i === index);
+  });
+}
+
+tabButtons.forEach((btn, idx) => {
+  btn.addEventListener('click', () => {
+    setStep(idx);
+    stopPresentationTimer();
+  });
+});
+
+function startPresentationTimer() {
+  stopPresentationTimer();
+  presentationTimer = setInterval(() => {
+    currentStepIdx = (currentStepIdx + 1) % demoSteps.length;
+    setStep(currentStepIdx);
+  }, 4200);
+}
+
+function stopPresentationTimer() {
+  if (presentationTimer) {
+    clearInterval(presentationTimer);
+    presentationTimer = null;
+  }
+}
+
+// Garantizar reproducción automática del video de fondo
+const heroBgVideo = document.querySelector('.hero-bg-video');
+if (heroBgVideo) {
+  heroBgVideo.muted = true;
+  const playBgVideo = () => {
+    const p = heroBgVideo.play();
+    if (p !== undefined) {
+      p.catch(() => {});
+    }
+  };
+  playBgVideo();
+  document.addEventListener('DOMContentLoaded', playBgVideo);
+  window.addEventListener('load', playBgVideo);
+  document.addEventListener('click', playBgVideo, { once: true });
+  document.addEventListener('touchstart', playBgVideo, { once: true });
+}
+</script>
+</body>
+</html>
